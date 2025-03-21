@@ -25,21 +25,9 @@
                         @endif
                     @endforeach
                 </p>
-
-                <div class="d-flex">
-                    <a href="{{ route('product.edit', ['id' => $viewData['product']->getID()]) }}" class="btn btn-warning me-2">
-                        Edit Product
-                    </a>
-
-                    <a href="{{ route('customizations.select') }}" class="btn btn-warning me-2">
+                    <a href="{{ route('customizations.select') }}" class="btn btn-dark me-2">
                         Select customization
                     </a>
-
-                <form action="{{ route('product.destroy', ['id' => $viewData['product']->getID()]) }}" method="POST">
-                    @csrf
-                    @method('DELETE') 
-                    <button type="submit" class="btn btn-danger">Delete product</button>
-                </form>
             </div>
         </div>
     </div>

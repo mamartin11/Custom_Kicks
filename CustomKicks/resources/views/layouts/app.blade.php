@@ -32,7 +32,7 @@
                     <a class="nav-link" href="{{ route('home.index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('product.create') }}">Create a Product</a>
+                    <a class="nav-link" href="{{ route('admin.dash') }}">Admin dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('product.index') }}">Products</a>

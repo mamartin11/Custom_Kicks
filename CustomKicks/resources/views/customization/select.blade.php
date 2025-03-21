@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-
-
 @section('content')
 <div class="container mt-4">
     <h2 class="text-center">{{ __('customizations.title') }}</h2>

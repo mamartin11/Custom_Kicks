@@ -24,23 +24,23 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>{{ __('adminCustomizationDashboard.id') }}</th>
-                    <th>{{ __('adminCustomizationDashboard.color') }}</th>
-                    <th>{{ __('adminCustomizationDashboard.design') }}</th>
-                    <th>{{ __('adminCustomizationDashboard.pattern') }}</th>
-                    <th>{{ __('adminCustomizationDashboard.actions') }}</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Size</th>
+    
                 </tr>
             </thead>
             <tbody>
-                @foreach($viewData['customizations'] as $customization)
+                @foreach($viewData['products'] as $product)
                 <tr>
-                    <td>{{ $customization->getId() }}</td>
-                    <td>{{ $customization->getColor() }}</td>
-                    <td>{{ $customization->getDesign() }}</td>
-                    <td>{{ $customization->getPattern() }}</td>
+                    <td>{{ $product->getId() }}</td>
+                    <td>{{ $product->getName() }}</td>
+                    <td>{{ $product->getPrice() }}</td>
+                    <td>{{ $product->getSize() }}</td>
                     <td>
-                        <a href="{{ route('admin.customizations.edit', $customization->getId()) }}" class="btn btn-warning btn-sm">{{ __('adminCustomizationDashboard.edit') }}</a>
-                        <a href="{{ route('admin.customizations.delete', $customization->getId()) }}" class="btn btn-danger btn-sm">{{ __('adminCustomizationDashboard.delete') }}</a>
+                        <a href="{{ route('product.edit', $product->getId()) }}" class="btn btn-warning btn-sm">{{ __('adminCustomizationDashboard.edit') }}</a>
+                        <a href="{{ route('product.destroy', $product->getId()) }}" class="btn btn-danger btn-sm">{{ __('adminCustomizationDashboard.delete') }}</a>
                     </td>
                 </tr>
                 @endforeach

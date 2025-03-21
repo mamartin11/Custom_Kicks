@@ -2,18 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 
 Route::controller(App\Http\Controllers\ProductController::class)->group(function () {
     Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('product.index');
-    Route::get('/products/create', 'App\Http\Controllers\ProductController@create')->name('product.create');
-    Route::post('/products/save', 'App\Http\Controllers\ProductController@save')->name('product.save');
     Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name('product.show');
-    Route::get('/products/edit/{id}', 'App\Http\Controllers\ProductController@edit')->name('product.edit');
-    Route::put('/products/update/{id}', 'App\Http\Controllers\ProductController@update')->name('product.update');
-    Route::delete('/product/{id}', 'App\Http\Controllers\ProductController@destroy')->name('product.destroy');
+    Auth::routes();
+});
+
+Route::controller(App\Http\Controllers\AdminProductController::class)->group(function () {
+    Route::get('/admin/products', 'App\Http\Controllers\AdminProductController@index')->name('admin.dash');
+    Route::get('/admin/products/create', 'App\Http\Controllers\AdminProductController@create')->name('product.create');
+    Route::post('/admin/products/save', 'App\Http\Controllers\AdminProductController@save')->name('product.save');
+    Route::get('/admin/products/edit/{id}', 'App\Http\Controllers\AdminProductController@edit')->name('product.edit');
+    Route::put('/admin/products/update/{id}', 'App\Http\Controllers\AdminProductController@update')->name('product.update');
+    Route::delete('/admin/product/{id}', 'App\Http\Controllers\AdminProductController@destroy')->name('product.destroy');
     Auth::routes();
 });
 
@@ -32,6 +35,6 @@ Route::controller(App\Http\Controllers\AdminCustomizationController::class)->gro
 });
 
 Route::get('/items/add', 'App\Http\Controllers\ItemController@create')->name('items.add');
-Route::get('/items/index', 'App\Http\Controllers\ItemController@index')->name("items.index");
+Route::get('/items/index', 'App\Http\Controllers\ItemController@index')->name('items.index');
 Route::get('/items/{id}', 'App\Http\Controllers\ItemController@show')->name('items.show');
 Route::post('/items/store', 'App\Http\Controllers\ItemController@store')->name('items.store');
