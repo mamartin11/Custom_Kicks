@@ -93,7 +93,6 @@ class ProductController extends Controller
         $product->setSize($request->input('size'));
         $product->setQuantity($request->input('quantity'));
 
-        // Si hay una nueva imagen, se actualiza
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
             $product->setImage($imagePath);

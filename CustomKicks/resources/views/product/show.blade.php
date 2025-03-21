@@ -20,7 +20,7 @@
 
                 <p class="card-text">
                     @foreach($viewData["product"]->getAttributes() as $key => $value)
-                        @if(!in_array($key, ['image','created_at', 'updated_at']))
+                        @if(!in_array($key, ['id','image','created_at', 'updated_at']))
                             <p><strong>{{ ucfirst(str_replace('_', ' ', $key)) }}:</strong> {{ $value }}</p>
                         @endif
                     @endforeach

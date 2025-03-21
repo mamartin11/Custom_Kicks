@@ -30,3 +30,8 @@ Route::controller(App\Http\Controllers\AdminCustomizationController::class)->gro
     Route::get('/admin/customizations/add', 'add')->name('admin.customizations.add');
     Route::post('/admin/customizations/store', 'store')->name('admin.customizations.store');
 });
+
+Route::get('/items/add', 'App\Http\Controllers\ItemController@create')->name('items.add');
+Route::get('/items/index', 'App\Http\Controllers\ItemController@index')->name("items.index");
+Route::get('/items/{id}', 'App\Http\Controllers\ItemController@show')->name('items.show');
+Route::post('/items/store', 'App\Http\Controllers\ItemController@store')->name('items.store');
