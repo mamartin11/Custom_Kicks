@@ -31,6 +31,10 @@
                         Edit Product
                     </a>
 
+                    <a href="{{ route('customizations.select') }}" class="btn btn-warning me-2">
+                        Select customization
+                    </a>
+
                 <form action="{{ route('product.destroy', ['id' => $viewData['product']->getID()]) }}" method="POST">
                     @csrf
                     @method('DELETE') 
