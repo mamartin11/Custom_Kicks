@@ -13,8 +13,10 @@ return new class extends Migration
             $table->string('color');
             $table->string('design');
             $table->string('pattern');
+            $table->string('image');
             $table->timestamps();
         });
+        
     }
 
     public function down(): void

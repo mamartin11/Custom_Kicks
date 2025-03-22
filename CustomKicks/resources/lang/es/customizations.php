@@ -8,5 +8,5 @@ return [
     'design' => 'Diseño',
     'pattern' => 'Patrón',
     'select_customization' => 'Seleccionar una Personalización:',
-    'use_customization' => 'Usar esta Personalización',
+    'use_customization' => 'Usar esta personalización y añadir al carrito',
 ];

@@ -20,7 +20,7 @@
                     
                     
                     <!-- Botón con el precio del producto -->
-                    <a href="{{ route('product.show', $product->getId()) }}" class="btn btn-primary">
+                    <a href="{{ route('item.show', $product->getId()) }}" class="btn btn-primary">
                         ${{ number_format($product->getPrice(), 2) }}
                     </a>
                 </div>
