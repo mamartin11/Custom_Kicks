@@ -19,7 +19,7 @@
         <h2 class="text-center">{{ __('adminCustomizationDashboard.title') }}</h2>
         <p class="text-center">{{ __('adminCustomizationDashboard.subtitle') }}</p>
 
-        <a href="{{ route('admin.customizations.add') }}" class="btn btn-success mb-3">{{ __('adminCustomizationDashboard.add_customization') }}</a>
+        <a href="{{ route('product.create') }}" class="btn btn-success mb-3">{{ __('adminCustomizationDashboard.add_customization') }}</a>
 
         <table class="table table-striped">
             <thead>
