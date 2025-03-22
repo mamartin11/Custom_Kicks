@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'budget',
+        'role'
     ];
 
     /**
@@ -32,6 +34,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user) {
+            $user->role = str_contains($user->email, '@customkicks.com') ? 'admin' : 'customer';
+        });
+    }
 
     /**
      * Get the attributes that should be cast.
