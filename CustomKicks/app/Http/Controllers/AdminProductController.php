@@ -9,16 +9,22 @@ use Illuminate\View\View;
 
 class AdminProductController extends Controller
 {
-
     public function index()
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
         $viewData = [];
         $viewData['products'] = Product::all();
 
         return view('admin.dash')->with('viewData', $viewData);
     }
+
     public function create(): view
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
         $viewData = [];
         $viewData['title'] = 'Create a product';
 
@@ -27,6 +33,9 @@ class AdminProductController extends Controller
 
     public function save(Request $request): RedirectResponse
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
         Product::validate($request);
 
         $newProduct = new Product;
@@ -50,6 +59,10 @@ class AdminProductController extends Controller
 
     public function destroy($id)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
+        
         Product::destroy($id);
 
         return redirect()->route('product.index')->with('success', 'Category deleted successfully!');
@@ -57,6 +70,10 @@ class AdminProductController extends Controller
 
     public function edit($id): View
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
+
         $viewData = [];
         $product = Product::findOrFail($id);
 
@@ -68,6 +85,10 @@ class AdminProductController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
+
         Product::validate($request);
 
         $product = Product::findOrFail($id);

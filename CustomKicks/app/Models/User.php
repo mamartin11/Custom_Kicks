@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'budget',
-        'role'
+        'role',
     ];
 
     /**
@@ -35,7 +35,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    
     protected static function boot()
     {
         parent::boot();

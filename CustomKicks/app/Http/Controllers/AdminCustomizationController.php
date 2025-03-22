@@ -9,6 +9,9 @@ class AdminCustomizationController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        }
         $viewData = [];
         $viewData['customizations'] = Customization::all();
 

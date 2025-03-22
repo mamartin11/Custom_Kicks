@@ -14,7 +14,6 @@ class Order extends Model
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      */
-
     public static function validate($request)
     {
         $request->validate([
