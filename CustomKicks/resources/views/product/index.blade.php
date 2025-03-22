@@ -28,12 +28,6 @@
                 value="{{ request()->input('size') }}">
         </div>
 
-        <!-- Minimum Quantity -->
-        <div class="col-md-2">
-            <input type="number" name="quantity" class="form-control" placeholder="Quantity" 
-                value="{{ request()->input('quantity') }}">
-        </div>
-
         <div class="col-md-2">
             <select name="brand" class="form-control">
                 <option value="">Brands</option>

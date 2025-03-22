@@ -28,9 +28,6 @@ class ProductController extends Controller
             $query->where('size', $request->input('size'));
         }
     
-        if ($request->filled('quantity')) {
-            $query->where('quantity', '>=', $request->input('quantity'));
-        }
 
         $brands = Product::select('brand')->distinct()->pluck('brand');
 
