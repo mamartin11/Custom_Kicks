@@ -65,7 +65,7 @@ class AdminCustomizationController extends Controller
             $path = $request->file('image')->store('customizations', 'public');
             $customization->setImage($path);
         }
-        
+
         $customization->save();
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customización agregada correctamente.');

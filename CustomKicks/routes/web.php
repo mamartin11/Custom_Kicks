@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminCustomizationController;
+use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
 
 // Página principal
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -35,10 +35,7 @@ Route::controller(AdminCustomizationController::class)->group(function () {
     Route::post('/admin/customizations/store', 'store')->name('admin.customizations.store');
 });
 
-
-#Estas son las de item (Nico)
+// Estas son las de item (Nico)
 Route::get('/product/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::post('/product/customize', [ItemController::class, 'applyCustomization'])->name('item.apply');
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
-
-

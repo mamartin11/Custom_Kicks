@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('image');
             $table->timestamps();
         });
-        
+
     }
 
     public function down(): void

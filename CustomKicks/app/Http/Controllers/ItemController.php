@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
-use App\Models\Order;
-use App\Models\Product;
 use App\Models\Customization;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Item;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-
-
 
 class ItemController extends Controller
 {
@@ -30,14 +26,14 @@ class ItemController extends Controller
     public function show(string $id): View
     {
         $viewData = [];
-    
+
         $product = Product::findOrFail($id);
-    
+
         $viewData['title'] = $product['name'];
         $viewData['subtitle'] = $product['name'];
         $viewData['product'] = $product;
         $viewData['customizations'] = Customization::all();
-    
+
         return view('item.index')->with('viewData', $viewData);
     }
 
@@ -52,16 +48,8 @@ class ItemController extends Controller
             'selected_design' => $customization->getDesign(),
             'selected_pattern' => $customization->getPattern(),
         ]);
-        
+
     }
 
-    public function store(Request $request)
-    {
-        
-    }
-
-    
-
-
-
+    public function store(Request $request) {}
 }

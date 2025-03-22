@@ -17,7 +17,7 @@ class Customization extends Model
      * $this->attributes['created_at'] - timestamp - contains the creaate date
      * $this->attributes['updated_at'] - timestamp - contains the update date
      */
-    protected $fillable = ['color', 'design', 'pattern','image'];
+    protected $fillable = ['color', 'design', 'pattern', 'image'];
 
     public static function validations($request)
     {

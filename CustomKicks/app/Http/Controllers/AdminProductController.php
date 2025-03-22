@@ -62,7 +62,7 @@ class AdminProductController extends Controller
         if (auth()->user()->role !== 'admin') {
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
-        
+
         Product::destroy($id);
 
         return redirect()->route('product.index')->with('success', 'Category deleted successfully!');
