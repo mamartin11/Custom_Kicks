@@ -13,10 +13,11 @@ class Customization extends Model
      * $this->attributes['design'] - string - contains the design type
      * $this->attributes['pattern'] - string - contains the pattern type
      * $this->attributes['item'] - int - contains the item id
+     * $this->attributes['image'] - string - contains the image path
      * $this->attributes['created_at'] - timestamp - contains the creaate date
      * $this->attributes['updated_at'] - timestamp - contains the update date
      */
-    protected $fillable = ['color', 'design', 'pattern'];
+    protected $fillable = ['color', 'design', 'pattern','image'];
 
     public static function validations($request)
     {
@@ -24,6 +25,7 @@ class Customization extends Model
             'color' => 'required|string',
             'design' => 'required|string',
             'pattern' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 
@@ -64,7 +66,17 @@ class Customization extends Model
 
     public function item()
     {
-        // return $this->belongsTo(Item::class);
+        return $this->belongsTo(Item::class);
+    }
+
+    public function setImage($imagePath)
+    {
+        $this->attributes['image'] = $imagePath;
+    }
+
+    public function getImage()
+    {
+        return $this->attributes['image'];
     }
 
     public function getCreatedAt()

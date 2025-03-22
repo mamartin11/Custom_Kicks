@@ -1,0 +1,149 @@
+.carousel-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background-color:rgb(255, 255, 255); /* Color claro opcional */
+    padding: 50px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Coverflow principal */
+.coverflow {
+    position: relative;
+    height: 320px;
+    padding: 20px 0;
+    perspective: 800px;
+}
+
+.coverflow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+
+/* Items del coverflow */
+.coverflow-item {
+    position: absolute;
+    width: 220px;
+    height: 300px;
+    transform-origin: center center;
+    transition: all 0.5s ease-out;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.coverflow-card {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transform: rotateY(0deg) rotateX(10deg);
+    transition: all 0.4s ease;
+}
+
+.coverflow-item img {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+}
+
+.coverflow-item {
+    width: 250px;
+    height: 320px;
+}
+
+
+.coverflow-title {
+    height: 15%;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Item activo */
+.coverflow-item.active {
+    z-index: 10;
+    transform: translateZ(50px) !important;
+}
+
+.coverflow-item.active .coverflow-card {
+    border: 2px solid #007bff;
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.5);
+    transform: rotateY(0deg) rotateX(10deg) scale(1.08);
+}
+
+/* Items a la izquierda y derecha */
+.coverflow-item.left {
+    z-index: 5;
+}
+
+.coverflow-item.right {
+    z-index: 5;
+}
+
+/* Controles */
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 100;
+}
+
+.control-btn {
+    background-color: black;
+    border: 2px solid black;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-top: 40px;
+    transition: all 0.3s ease;
+}
+
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.submit-btn:not(:disabled):hover {
+    background-color: #0069d9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

@@ -29,9 +29,10 @@ class AdminCustomizationController extends Controller
     {
         $customization = Customization::findOrFail($id);
 
-        $customization->color = $request->input('color');
-        $customization->design = $request->input('design');
-        $customization->pattern = $request->input('pattern');
+        $customization->setColor($request->input('color'));
+        $customization->setDesign($request->input('design'));
+        $customization->setPattern($request->input('pattern'));
+        $customization->setImage($request->input('image'));
         $customization->save();
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customización actualizada correctamente.');
@@ -58,6 +59,13 @@ class AdminCustomizationController extends Controller
         $customization->setColor($request->input('color'));
         $customization->setDesign($request->input('design'));
         $customization->setPattern($request->input('pattern'));
+        $customization->setImage($request->input('image'));
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('customizations', 'public');
+            $customization->setImage($path);
+        }
+        
         $customization->save();
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customización agregada correctamente.');

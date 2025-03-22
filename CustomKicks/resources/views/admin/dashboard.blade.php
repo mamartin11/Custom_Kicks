@@ -28,7 +28,11 @@
                     <th>{{ __('adminCustomizationDashboard.color') }}</th>
                     <th>{{ __('adminCustomizationDashboard.design') }}</th>
                     <th>{{ __('adminCustomizationDashboard.pattern') }}</th>
+                    <th>{{ __('adminCustomizationDashboard.image') }}</th>
+                    <th>{{ __('adminCustomizationDashboard.created_at') }}</th>
+                    <th>{{ __('adminCustomizationDashboard.updated_at') }}</th>
                     <th>{{ __('adminCustomizationDashboard.actions') }}</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +42,9 @@
                     <td>{{ $customization->getColor() }}</td>
                     <td>{{ $customization->getDesign() }}</td>
                     <td>{{ $customization->getPattern() }}</td>
+                    <td><img src="{{ asset('storage/' . $customization->getImage()) }}" alt="Customization" style="width: 100px;"></td>
+                    <td>{{ $customization->getCreatedAt() }}</td>
+                    <td>{{ $customization->getUpdatedAt() }}</td>
                     <td>
                         <a href="{{ route('admin.customizations.edit', $customization->getId()) }}" class="btn btn-warning btn-sm">{{ __('adminCustomizationDashboard.edit') }}</a>
                         <a href="{{ route('admin.customizations.delete', $customization->getId()) }}" class="btn btn-danger btn-sm">{{ __('adminCustomizationDashboard.delete') }}</a>
