@@ -58,6 +58,7 @@ class AdminCustomizationController extends Controller
         if (auth()->user()->role !== 'admin') {
             abort(403, 'No tienes permisos para acceder a esta página.');
         }
+
         return view('admin.addCustomization');
     }
 

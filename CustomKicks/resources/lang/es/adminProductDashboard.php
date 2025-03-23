@@ -8,7 +8,7 @@ return [
     'add_customization' => 'Agregar nuevo producto',
     'id' => 'ID',
     'name' => 'Nombre',
-    'image'=>'Imagen',
+    'image' => 'Imagen',
     'price' => 'Precio',
     'size' => 'Talla',
     'edit' => 'Editar',

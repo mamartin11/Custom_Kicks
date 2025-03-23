@@ -38,8 +38,8 @@
 
                 <div class="vr bg-white mx-2 d-none d-lg-block"></div> 
                 @guest 
-                <a class="nav-link active" href="{{ route('login') }}">{{ __('layout.login') }}</a> 
-                <a class="nav-link active" href="{{ route('register') }}">{{ __('layout.register') }}</a> 
+                <a class="nav-link active" href="{{ route('login') }}">{{ __('layout.nav_login') }}</a> 
+                <a class="nav-link active" href="{{ route('register') }}">{{ __('layout.nav_register') }}</a> 
                 @else 
                 <form id="logout" action="{{ route('logout') }}" method="POST"> 
                     <a role="button" class="nav-link active" 

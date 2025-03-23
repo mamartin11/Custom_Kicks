@@ -61,7 +61,7 @@
 
 <!-- Carousel -->
 <div class="container my-5">
-        <h2 class="text-center">{{ $viewData['subtitle'] }}</h2>
+        <h2 class="text-center">{{__('home.carousel_title')}}</h2>
         <div id="carouselSneakers" class="carousel slide mt-4" data-bs-ride="carousel">
             <div class="carousel-inner text-center"> <!-- Centrar imágenes -->
                 @foreach($viewData['products'] as $key => $product)
