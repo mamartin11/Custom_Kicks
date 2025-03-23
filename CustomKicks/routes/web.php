@@ -22,7 +22,7 @@ Route::controller(AdminProductController::class)->group(function () {
     Route::post('/admin/products/save', 'save')->name('product.save');
     Route::get('/admin/products/edit/{id}', 'edit')->name('product.edit');
     Route::put('/admin/products/update/{id}', 'update')->name('product.update');
-    Route::delete('/admin/product/{id}', 'destroy')->name('product.destroy');
+    Route::get('/admin/product/{id}', 'destroy')->name('product.destroy');
 });
 
 // Customizations - Admin
