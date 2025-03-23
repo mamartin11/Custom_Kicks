@@ -1,16 +1,14 @@
 <!doctype html>
 
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
 
-    <title>@yield('title', 'Online Store')</title>
+    <title>@yield('title', __('layout.title'))</title>
 
 </head>
 
@@ -20,7 +18,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         
-        <a class="navbar-brand" href="{{ route('home.index') }}">Custom Kicks</a>
+        <a class="navbar-brand" href="{{ route('home.index') }}">{{ __('layout.title')}}</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,23 +27,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home.index') }}">Home</a>
+                    <a class="nav-link" href="{{ route('home.index') }}">{{ __('layout.nav_home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.dash') }}">Admin dashboard</a>
+                    <a class="nav-link" href="{{ route('admin.dash') }}">{{ __('layout.nav_admin') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('product.index') }}">Products</a>
+                    <a class="nav-link" href="{{ route('product.index') }}">{{ __('layout.nav_products') }}</a>
                 </li>
 
                 <div class="vr bg-white mx-2 d-none d-lg-block"></div> 
                 @guest 
-                <a class="nav-link active" href="{{ route('login') }}">Login</a> 
-                <a class="nav-link active" href="{{ route('register') }}">Register</a> 
+                <a class="nav-link active" href="{{ route('login') }}">{{ __('layout.login') }}</a> 
+                <a class="nav-link active" href="{{ route('register') }}">{{ __('layout.register') }}</a> 
                 @else 
                 <form id="logout" action="{{ route('logout') }}" method="POST"> 
                     <a role="button" class="nav-link active" 
-                    onclick="document.getElementById('logout').submit();">Logout</a> 
+                    onclick="document.getElementById('logout').submit();">{{ __('layout.nav_logout') }}</a> 
                     @csrf 
                 </form> 
                 @endguest 
@@ -58,7 +56,7 @@
 
 <header class="masthead bg-primary text-black text-center py-4">
     <div class="container d-flex align-items-center flex-column">
-        <h2>@yield('subtitle', 'Taller 1 Laravel')</h2>
+        <h2>@yield('subtitle', __('layout.subtitle'))</h2>
     </div>
 </header>
 
@@ -70,7 +68,7 @@
     <div class="container">
         <small>
             <a class="text-reset fw-bold text-decoration-none" target="_blank">
-                Miguel Ángel Martínez García
+            {{ __('layout.footer') }}
             </a>
         </small>
     </div>

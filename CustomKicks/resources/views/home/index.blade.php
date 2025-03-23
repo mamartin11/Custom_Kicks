@@ -1,31 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Custom Kicks - Home')
+@section('title', __('home.title'))
 
-@section('subtitle', 'Sneakers únicos para personas únicas')
+@section('subtitle', __('home.subtitle'))
 
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
 
-<!-- Hero Section -->
+<!-- Initial message -->
 <div class="container text-center my-5">
     <img src="{{ asset('images/logo.jpeg') }}" class="img-fluid rounded w-50" alt="Bienvenido a Custom Kicks">
-    <h1 class="mt-4">¡Crea tu estilo con sneakers personalizados!</h1>
-    <p class="lead">Cada par de sneakers es una obra de arte única. Personaliza los tuyos ahora.</p>
-    <a href="{{ route('product.index') }}" class="btn btn-dark btn-lg">Explorar Sneakers</a>
+    <h1 class="mt-4">{{__('home.initial_message')}}</h1>
+    <p class="lead">{{__('home.initial_description')}}</p>
+    <a href="{{ route('product.index') }}" class="btn btn-dark btn-lg">{{__('home.initial_button')}}</a>
 </div>
 
-<!-- Sobre Nosotros -->
+<!-- About Custom Kicks -->
 <div class="container my-5">
     <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-between">
             <div>
-                <h2>¿Qué es Custom Kicks?</h2>
+                <h2>{{__('home.about_title')}}</h2>
                 <p>
-                    Somos un equipo de artistas dedicados a transformar sneakers en piezas únicas. 
-                    Trabajamos con materiales de alta calidad para asegurarte un diseño exclusivo y duradero.
+                    {{__('home.about_description')}}
                 </p>
             </div>
             <!-- Nueva imagen debajo del texto -->
@@ -38,29 +37,29 @@
 </div>
 
 
-<!-- Servicios -->
+<!-- Services -->
 <div class="container my-5 text-center">
-    <h2>Nuestros Servicios</h2>
+    <h2>{{__('home.services_title')}}</h2>
     <div class="row mt-4">
         <div class="col-md-4">
+            <h4>{{__('home.service1')}}</h4>
+            <p>{{__('home.service1_description')}}</p>
             <img src="{{ asset('images/service1.webp') }}" class="img-fluid rounded mb-3" alt="Personalización Total">
-            <h4>Personalización Total</h4>
-            <p>Elige colores, texturas y diseños para hacer tu calzado único.</p>
         </div>
         <div class="col-md-4">
+            <h4>{{__('home.service2')}}</h4>
+            <p>{{__('home.service2_description')}}</p>
             <img src="{{ asset('images/service2.webp') }}" class="img-fluid rounded mb-3" alt="Diseños Exclusivos">
-            <h4>Diseños Exclusivos</h4>
-            <p>Colaboramos con artistas para ofrecer ediciones limitadas.</p>
         </div>
         <div class="col-md-4">
+            <h4>{{__('home.service3')}}</h4>
+            <p>{{__('home.service3_description')}}</p>
             <img src="{{ asset('images/service3.webp') }}" class="img-fluid rounded mb-3" alt="Restauración y Reparación">
-            <h4>Restauración y Reparación</h4>
-            <p>Revive tus sneakers favoritos con nuestro servicio de restauración.</p>
         </div>
     </div>
 </div>
 
-<!-- Carrusel de Sneakers Personalizados -->
+<!-- Carousel -->
 <div class="container my-5">
         <h2 class="text-center">{{ $viewData['subtitle'] }}</h2>
         <div id="carouselSneakers" class="carousel slide mt-4" data-bs-ride="carousel">
@@ -73,19 +72,19 @@
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselSneakers" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%);"></span>
-                <span class="visually-hidden">Anterior</span>
+                <span class="visually-hidden">{{__('home.carousel_back')}}</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselSneakers" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%);"></span>
-                <span class="visually-hidden">Siguiente</span>
+                <span class="visually-hidden">{{__('home.carousel_next')}}</span>
             </button>
         </div>
     </div>
 
-<!-- Productos Destacados -->
+<!-- Newest -->
 <div class="container my-5">
-    <h2 class="text-center fw-bold">🔥 Lo Más Nuevo en la Tienda 🔥</h2>
-    <p class="text-center text-muted">Descubre nuestros últimos diseños de sneakers personalizados</p>
+    <h2 class="text-center fw-bold">{{__('home.newest_title')}}</h2>
+    <p class="text-center text-muted">{{__('home.newest_description')}}</p>
     
     <div class="row mt-4">
         @foreach($viewData['newest'] as $product)
@@ -97,7 +96,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title fw-bold">{{ $product->getName() }}</h5>
                     <p class="card-text text-success fw-bold fs-5">${{ number_format($product->getPrice(), 2) }}</p>
-                    <a href="{{ route('item.show', $product->getId()) }}" class="btn btn-dark w-100">Ver más</a>
+                    <a href="{{ route('item.show', $product->getId()) }}" class="btn btn-dark w-100">{{__('home.newest_button')}}</a>
                 </div>
             </div>
         </div>

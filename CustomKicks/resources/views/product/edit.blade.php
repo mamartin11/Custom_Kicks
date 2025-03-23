@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Product')
+@section('title', __('productEdit.title'))
+
+@section('subtitle', __('productEdit.subtitle'))
 
 @section('content')
 
 <div class="container mt-4">
-    <h2 class="mb-4">Edit Product</h2>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -18,48 +19,48 @@
         @method('PUT')
 
         <div class="mb-3">
-            <label class="form-label">Name</label>
+            <label class="form-label">{{ __('productEdit.name') }}</label>
             <input type="text" name="name" class="form-control" value="{{ $viewData['product']->getName() }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Price</label>
+            <label class="form-label">{{ __('productEdit.price') }}</label>
             <input type="number" name="price" class="form-control" value="{{ $viewData['product']->getPrice() }}" step="0.01" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Description</label>
+            <label class="form-label">{{ __('productEdit.description') }}</label>
             <textarea name="description" class="form-control" rows="3" required>{{ $viewData['product']->getDescription() }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Brand</label>
+            <label class="form-label">{{ __('productEdit.brand') }}</label>
             <input type="text" name="brand" class="form-control" value="{{ $viewData['product']->getBrand() }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Size</label>
+            <label class="form-label">{{ __('productEdit.size') }}</label>
             <input type="text" name="size" class="form-control" value="{{ $viewData['product']->getSize() }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Quantity</label>
+            <label class="form-label">{{ __('productEdit.quantity') }}</label>
             <input type="number" name="quantity" class="form-control" value="{{ $viewData['product']->getQuantity() }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Current Image</label>
+            <label class="form-label">{{ __('productEdit.current_image') }}</label>
             <div>
                 <img src="{{ asset('storage/' . $viewData['product']->getImage()) }}" class="img-fluid" style="max-width: 150px;">
             </div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Upload New Image</label>
+            <label class="form-label">{{ __('productEdit.upload_image') }}</label>
             <input type="file" name="image" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Product</button>
+        <button type="submit" class="btn btn-primary">{{ __('productEdit.button') }}</button>
     </form>
 </div>
 
