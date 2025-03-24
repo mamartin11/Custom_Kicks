@@ -11,12 +11,13 @@ return new class extends Migration
         Schema::create('item', function (Blueprint $table) {
             $table->id();
             $table->integer('subtotal');
-            // ForeingKeys
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->foreignId('customization_id')->default(0)->constrained()->onDelete('cascade');
-            $table->foreignId('order_id')->constrained()->onDelete('cascade');
-
             $table->timestamps();
+            // ForeingKeys
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('customization_id')->references('id')->on('customizations')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
+            
         });
     }
 

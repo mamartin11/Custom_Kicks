@@ -112,4 +112,42 @@ class ItemController extends Controller
 
         return redirect()->route('item.list')->with('success', 'All items removed from cart.');
     }
+    
+    public function spinDiscountWheel(Request $request, int $id)
+    {
+        $product = Product::findOrFail($id);
+        
+        $options = [
+            ['type' => 'bonus', 'value' => 100000],
+            ['type' => 'discount', 'value' => 20],
+            ['type' => 'discount', 'value' => 50],
+            ['type' => 'none', 'value' => 0]
+        ];
+
+        $result = $options[array_rand($options)];
+
+        $originalPrice = $product->price;
+        $finalPrice = $originalPrice;
+
+        if ($result['type'] === 'bonus') {
+            $finalPrice = max(0, $originalPrice - $result['value']);
+        } elseif ($result['type'] === 'discount') {
+            $finalPrice = $originalPrice * (1 - $result['value'] / 100);
+        }
+        
+        sleep(3);
+
+        $cart = session()->get('cart_items', []);
+
+        foreach ($cart as &$item) {
+            if ($item['product_id'] == $id) {
+                $item['subtotal'] = $finalPrice; // Se actualiza el precio en el carrito
+            }
+        }
+    
+        session()->put('cart_items', $cart);
+        session()->put('spin_result', $result); // Guardar resultado de la ruleta
+    
+        return redirect()->route('order.checkout')->with('success', 'The wheel has been spun! Check your new price.');
+    }
 }

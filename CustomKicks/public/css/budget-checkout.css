@@ -30,3 +30,25 @@
         width: 100%;
     }
 }
+
+.wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+.wheel {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #ffcc00 0deg 90deg,
+        #ff6600 90deg 180deg,
+        #00cc66 180deg 270deg,
+        #ff0033 270deg 360deg
+    );
+    border: 5px solid #333;
+    position: relative;
+    transition: transform 3s ease-out;
+}

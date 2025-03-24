@@ -10,7 +10,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <button type="button" class="btn btn-success" id="confirmYesBtn">Yes</button>
+                <form id="confirmOrderForm" method="POST" action="{{ route('order.confirm') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Yes</button>
+                </form>
             </div>
         </div>
     </div>

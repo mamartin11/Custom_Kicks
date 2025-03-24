@@ -13,6 +13,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('product.index');
+    Route::get('/products/{id}', 'show')->name('product.show');
+    Route::get('/spin.wheel/{id}', 'showSpinWheel')->name('spin.wheel.start');
+    
     Auth::routes();
 });
 
@@ -38,6 +41,7 @@ Route::controller(AdminCustomizationController::class)->group(function () {
 
 // Estas son las de item (Nico)
 Route::get('/product/{id}', [ItemController::class, 'show'])->name('item.show');
+Route::post('/spin-wheel/{id}', [ItemController::class, 'spinDiscountWheel'])->name('spin.wheel');
 Route::post('/product/customize', [ItemController::class, 'applyCustomization'])->name('item.apply');
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 Route::get('/items/list', [ItemController::class, 'list'])->name('item.list');
@@ -46,3 +50,5 @@ Route::delete('/items/cart', [ItemController::class, 'clearCart'])->name('item.c
 
 //Order
 Route::get('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
+Route::post('/order/confirm', [OrderController::class, 'confirmOrder'])->name('order.confirm');
+
