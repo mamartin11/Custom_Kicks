@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', __('productIndex.title'))
+@section('title', __('product/productIndex.title'))
 
-@section('subtitle', __('productIndex.subtitle'))
+@section('subtitle', __('product/productIndex.subtitle'))
 
 @section('content')
 
@@ -12,26 +12,26 @@
 
         <!-- Min Price -->
         <div class="col-md-2">
-            <input type="number" name="min_price" class="form-control" placeholder={{ __('productIndex.placeholder_minprice') }} 
+            <input type="number" name="min_price" class="form-control" placeholder={{ __('product/productIndex.placeholder_minprice') }} 
                 value="{{ request()->input('min_price') }}">
         </div>
 
         <!-- Max Price -->
         <div class="col-md-2">
-            <input type="number" name="max_price" class="form-control" placeholder={{ __('productIndex.placeholder_maxprice') }} 
+            <input type="number" name="max_price" class="form-control" placeholder={{ __('product/productIndex.placeholder_maxprice') }} 
                 value="{{ request()->input('max_price') }}">
         </div>
 
         <!-- Size -->
         <div class="col-md-2">
-            <input type="float" name="size" class="form-control" placeholder={{ __('productIndex.placeholder_size') }} 
+            <input type="float" name="size" class="form-control" placeholder={{ __('product/productIndex.placeholder_size') }} 
                 value="{{ request()->input('size') }}">
         </div>
 
         <!-- Brand -->
         <div class="col-md-2">
             <select name="brand" class="form-control">
-                <option value="">{{ __('productIndex.placeholder_brand') }}</option>
+                <option value="">{{ __('product/productIndex.placeholder_brand') }}</option>
                 @foreach ($viewData["brands"] as $brand)
                     <option value="{{ $brand }}" {{ request()->input('brand') == $brand ? 'selected' : '' }}>
                         {{ $brand }}
@@ -42,7 +42,7 @@
 
         <!-- Filter button -->
         <div class="col-md-1">
-            <button type="submit" class="btn btn-primary">{{ __('productIndex.filter_button') }}</button>
+            <button type="submit" class="btn btn-primary">{{ __('product/productIndex.filter_button') }}</button>
         </div>
     </div>
 </form>

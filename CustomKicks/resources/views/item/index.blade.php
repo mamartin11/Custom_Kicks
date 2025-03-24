@@ -17,11 +17,10 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $viewData['product']->getName() }}</h5>
                 <p class="card-text">
-                    @foreach($viewData['product']->getAttributes() as $key => $value)
-                        @if(!in_array($key, ['id','image','created_at', 'updated_at']))
-                            <p><strong>{{ ucfirst(str_replace('_', ' ', $key)) }}:</strong> {{ $value }}</p>
-                        @endif
-                    @endforeach
+                        <p><strong>{{__('item/index.price')}}:</strong> {{ $viewData['product']->getPrice() }}</p>
+                        <p><strong>{{__('item/index.description')}}:</strong> {{ $viewData['product']->getDescription() }}</p>
+                        <p><strong>{{__('item/index.brand')}}:</strong> {{ $viewData['product']->getBrand() }}</p>
+                        <p><strong>{{__('item/index.size')}}:</strong> {{ $viewData['product']->getSize() }}</p>
                 </p>
             </div>
         </div>
@@ -32,9 +31,9 @@
 @if(session('success'))
     <div class="alert alert-success text-center">
         <p>{{ session('success') }}</p>
-        <p><strong>Color:</strong> {{ session('selected_color') }}</p>
-        <p><strong>Design:</strong> {{ session('selected_design') }}</p>
-        <p><strong>Pattern:</strong> {{ session('selected_pattern') }}</p>
+        <p><strong>{{ __('item/index.color') }}:</strong> {{ session('selected_color') }}</p>
+        <p><strong>{{ __('item/index.design') }}:</strong> {{ session('selected_design') }}</p>
+        <p><strong>{{ __('item/index.pattern') }}:</strong> {{ session('selected_pattern') }}</p>
     </div>
 @endif
 
@@ -67,7 +66,7 @@
         <div class="carousel-controls">
             <button type="button" id="prevBtn" class="control-btn">⟨</button>
             <button type="submit" class="btn btn-primary submit-btn" disabled id="submit-btn">
-                {{ __('customizations.use_customization') }}
+                {{ __('item/index.use_customization') }}
             </button>
             <button type="button" id="nextBtn" class="control-btn">⟩</button>
         </div>
