@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Models\Customization;
 use App\Models\Item;
 use App\Models\Product;
@@ -51,5 +52,64 @@ class ItemController extends Controller
 
     }
 
-    public function store(Request $request) {}
+    public function store(Request $request): RedirectResponse
+    {
+        $product = Product::find($request->input('product_id'));
+        $customization = Customization::find($request->input('customization_id'));
+
+        $item = [
+            'product_id' => $product->getId(),
+            'product_name' => $product->getName(),
+            'price' => $product->getPrice(),
+            'customization_id' => $customization->getId(),
+            'customization' => [
+                'color' => $customization->getColor(),
+                'design' => $customization->getDesign(),
+                'pattern' => $customization->getPattern(),
+            ],
+            'subtotal' => $product->getPrice(), // simple, sin lógica extra
+        ];
+
+        // Guardar en la sesión (como array de items)
+        $cart = session()->get('cart_items', []);
+        $cart[] = $item;
+        session()->put('cart_items', $cart);
+
+        // Redirección con mensajes de éxito
+        return redirect()->route('item.list')
+            ->with('success', 'Customization applied and item added to cart.')
+            ->with('selected_color', $customization->getColor())
+            ->with('selected_design', $customization->getDesign())
+            ->with('selected_pattern', $customization->getPattern());
+    }
+
+    public function list(): View
+    {
+        $cartItems = session()->get('cart_items', []);
+
+        return view('item.list', [
+            'title' => 'Your Cart Items',
+            'cartItems' => $cartItems,
+        ]);
+    }
+
+    public function removeFromCart(int $index): RedirectResponse
+    {
+        $cart = session()->get('cart_items', []);
+
+        if (isset($cart[$index])) {
+            unset($cart[$index]);
+            $cart = array_values($cart); // Reindexar para evitar huecos
+            session()->put('cart_items', $cart);
+        }
+
+        return redirect()->route('item.list')->with('success', 'Item removed from cart.');
+    }
+
+    public function clearCart(): RedirectResponse
+    {
+        session()->forget('cart_items');
+
+        return redirect()->route('item.list')->with('success', 'All items removed from cart.');
+    }
 }

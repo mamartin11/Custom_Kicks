@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -10,15 +12,19 @@ class Order extends Model
      * ATTRIBUTES
      * $this->attributes['id'] - int - contains the order primary key (id)
      * $this->attributes['total'] - int - contains the total amount of the order
+     * $this->attributes['user_id'] - int - contains the user id
      * $this->attributes['order_date'] - date - contains the order date
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      */
+
+    protected $fillable = ['total', 'order_date', 'user_id'];
     public static function validate($request)
     {
         $request->validate([
             'total' => 'required|integer',
             'order_date' => 'required|date',
+            'user_id' => 'required|integer',
         ]);
     }
 
@@ -55,13 +61,13 @@ class Order extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function item()
+    public function item(): HasMany
     {
-        // return $this->hasMany(Item::class);
+        return $this->hasMany(Item::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
-        // return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

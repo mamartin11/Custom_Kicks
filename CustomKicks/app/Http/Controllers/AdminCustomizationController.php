@@ -74,6 +74,11 @@ class AdminCustomizationController extends Controller
         $customization->setColor($request->input('color'));
         $customization->setDesign($request->input('design'));
         $customization->setPattern($request->input('pattern'));
+        $customization->setImage($request->input('image'));
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('customizations', 'public');
+            $customization->setImage($path);
+        }
         $customization->save();
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customización agregada correctamente.');

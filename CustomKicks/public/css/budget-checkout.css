@@ -1,0 +1,32 @@
+.count-up-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.budget-container {
+    color: #9ED3FF;
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #print-area,
+    #print-area * {
+        visibility: visible;
+    }
+
+    #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}

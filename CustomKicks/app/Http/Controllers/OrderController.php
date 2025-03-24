@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+
 class OrderController extends Controller
 {
-    public function index()
+    public function checkout(): View
     {
-        $viewData = [];
-        $viewData['title'] = 'Orders details';
-        $viewData['current_time'] = date('Y-m-d H:i:s');
+        $cartItems = session()->get('cart_items', []);
+        $total = array_sum(array_column($cartItems, 'subtotal'));
+        $userBudget = auth()->user()->budget ?? 0;
+        $remainingBudget = $userBudget - $total;
 
-        return view('order.index')->with('viewData', $viewData);
+        return view('order.checkout', [
+            'title' => 'Order Summary',
+            'items' => $cartItems,
+            'total' => $total,
+            'userBudget' => $userBudget,
+            'remainingBudget' => $remainingBudget,
+        ]);
     }
+
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 // Página principal
@@ -39,3 +40,9 @@ Route::controller(AdminCustomizationController::class)->group(function () {
 Route::get('/product/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::post('/product/customize', [ItemController::class, 'applyCustomization'])->name('item.apply');
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+Route::get('/items/list', [ItemController::class, 'list'])->name('item.list');
+Route::delete('/items/cart/{index}', [ItemController::class, 'removeFromCart'])->name('item.remove');
+Route::delete('/items/cart', [ItemController::class, 'clearCart'])->name('item.clear');
+
+//Order
+Route::get('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');

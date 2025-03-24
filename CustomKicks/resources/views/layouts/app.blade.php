@@ -35,6 +35,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('product.index') }}">{{ __('layout.nav_products') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('item.list') }}">{{ __('layout.nav_cart') }}</a>
+                </li>
 
                 <div class="vr bg-white mx-2 d-none d-lg-block"></div> 
                 @guest 
@@ -76,5 +79,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+@stack('scripts')
+@stack('styles')
 </body>
 </html>
