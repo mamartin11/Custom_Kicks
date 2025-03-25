@@ -45,7 +45,7 @@ Genera la clave de aplicación de Laravel:
 
 3. Importa el archivo de base de datos:
 
-    * Entra a [phpMyAdmin]().
+    * Entra a [phpMyAdmin](http://localhost/phpmyadmin/).
 
     * Selecciona la base de datos customkicks.
 
