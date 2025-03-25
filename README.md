@@ -54,7 +54,7 @@ Genera la clave de aplicación de Laravel:
     * Selecciona el archivo .sql que se haya exportado previamente.
 
 
-5. Asegúrate de configurar correctamente la conexión en el archivo .env:
+4. Asegúrate de configurar correctamente la conexión en el archivo .env:
 
 ```
 DB_CONNECTION=mysql
