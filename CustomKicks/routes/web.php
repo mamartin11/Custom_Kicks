@@ -16,6 +16,8 @@ Route::controller(ProductController::class)->group(function () {
     Auth::routes();
 });
 
+
+
 // Productos - Admin
 Route::controller(AdminProductController::class)->group(function () {
     Route::get('/admin/products', 'index')->name('admin.dash');
@@ -37,6 +39,7 @@ Route::controller(AdminCustomizationController::class)->group(function () {
 });
 
 // Estas son las de item (Nico)
+Route::post('/cart/save', [ItemController::class, 'saveItemsToDatabase'])->name('item.save');
 Route::get('/product/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::post('/product/customize', [ItemController::class, 'applyCustomization'])->name('item.apply');
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');

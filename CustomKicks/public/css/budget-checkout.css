@@ -1,32 +1,38 @@
-.count-up-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-align: center;
-}
-
-.budget-container {
-    color: #9ED3FF;
-    background: #111;
-    padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
 @media print {
     body * {
         visibility: hidden;
     }
-
+ 
     #print-area,
     #print-area * {
         visibility: visible;
     }
-
+ 
     #print-area {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
     }
+ 
+    /* Oculta botones innecesarios en la impresión */
+    #confirmBtn,
+    #spinWheelBtn {
+        display: none;
+    }
 }
+ 
+.budget-container {
+    background-color: #111;
+    color: #9ED3FF;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+}
+ 
+.count-up-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+ 

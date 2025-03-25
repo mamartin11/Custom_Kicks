@@ -1,53 +1,60 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\RedirectResponse;
 use App\Models\Customization;
 use App\Models\Item;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-
+ 
 class ItemController extends Controller
 {
+    /**
+     * show items
+     */
+    public function index(): view
+    {
+        $items = Item::all();
+ 
+        return view('items.index', [
+            'title' => 'Items',
+            'items' => $items,
+        ]);
+    }
+ 
     public function show(string $id): View
     {
         $viewData = [];
-
+ 
         $product = Product::findOrFail($id);
-
+ 
         $viewData['title'] = $product['name'];
         $viewData['subtitle'] = $product['name'];
         $viewData['product'] = $product;
         $viewData['customizations'] = Customization::all();
-
+ 
         return view('item.index')->with('viewData', $viewData);
     }
-
+ 
     public function applyCustomization(Request $request)
     {
-
+ 
         $customization = Customization::findOrFail($request->input('id'));
-
+ 
         return redirect()->route('item.show', $request->input('product_id'))->with([
             'success' => 'Customization applied successfully!',
             'selected_color' => $customization->getColor(),
             'selected_design' => $customization->getDesign(),
             'selected_pattern' => $customization->getPattern(),
         ]);
-
+ 
     }
-
+ 
     public function store(Request $request): RedirectResponse
     {
-    
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-            'customization_id' => 'nullable|integer|exists:customizations,id',
-        ]);
- 
-        $product = Product::findOrFail($request->input('product_id'));
+        $product = Product::find($request->input('product_id'));
         $customization = Customization::find($request->input('customization_id'));
  
         $item = [
@@ -60,31 +67,31 @@ class ItemController extends Controller
                 'design' => $customization->getDesign(),
                 'pattern' => $customization->getPattern(),
             ],
-            'subtotal' => $product->getPrice(),
+            'subtotal' => $product->getPrice(), // simple, sin lógica extra
         ];
  
+        // Guardar en la sesión (como array de items)
+        $cart = session()->get('cart_items', []);
+        $cart[] = $item;
+        session()->put('cart_items', $cart);
         
-        session()->push('cart_items', $item);
  
-        
-        $viewData = [
-            'success' => 'Customization applied and item added to cart.',
-            'selected_color' => $customization->getColor(),
-            'selected_design' => $customization->getDesign(),
-            'selected_pattern' => $customization->getPattern(),
-        ];
- 
-        return redirect()->route('item.list')->with($viewData);
+        // Redirección con mensajes de éxito
+        return redirect()->route('item.list')
+            ->with('success', 'Customization applied and item added to cart.')
+            ->with('selected_color', $customization->getColor())
+            ->with('selected_design', $customization->getDesign())
+            ->with('selected_pattern', $customization->getPattern());
     }
  
     public function list(): View
     {
-        $viewData = [
-            'title' => 'Your Cart Items',
-            'cartItems' => session()->get('cart_items', []),
-        ];
+        $cartItems = session()->get('cart_items', []);
  
-        return view('item.list')->with('viewData', $viewData);
+        return view('item.list', [
+            'title' => 'Your Cart Items',
+            'cartItems' => $cartItems,
+        ]);
     }
  
     public function removeFromCart(int $index): RedirectResponse
@@ -93,7 +100,8 @@ class ItemController extends Controller
  
         if (isset($cart[$index])) {
             unset($cart[$index]);
-            session()->put('cart_items', array_values($cart));
+            $cart = array_values($cart); // Reindexar para evitar huecos
+            session()->put('cart_items', $cart);
         }
  
         return redirect()->route('item.list')->with('success', 'Item removed from cart.');
@@ -105,5 +113,40 @@ class ItemController extends Controller
  
         return redirect()->route('item.list')->with('success', 'All items removed from cart.');
     }
+    
+
+
+
+
+    public function saveItemsToDatabase(): RedirectResponse
+
+    {
+
+        $cartItems = session()->get('cart_items', []);
+    
+        if (empty($cartItems)) {
+
+            return redirect()->route('item.list')->with('error', 'No items to save.');
+
+        }
+    
+        foreach ($cartItems as $cartItem) {
+
+            Item::create([
+
+                'product_id' => $cartItem['product_id'],
+
+                'customization_id' => $cartItem['customization_id'] ?? null,
+
+                'subtotal' => $cartItem['subtotal'],
+
+            ]);
+
+        }
+    
+        return redirect()->route('item.list')->with('success', 'Items saved successfully!');
+
+    }
  
+
 }

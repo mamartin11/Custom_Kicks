@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class Customization extends Model
 {
     /**
@@ -64,9 +64,9 @@ class Customization extends Model
         $this->attributes['pattern'] = $pattern;
     }
 
-    public function item()
+    public function items(): HasMany
     {
-        return $this->belongsTo(Item::class);
+        return $this->hasMany(Item::class, 'customization_id');
     }
 
     public function setImage($imagePath)

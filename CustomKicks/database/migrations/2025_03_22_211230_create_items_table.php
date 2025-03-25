@@ -14,8 +14,6 @@ return new class extends Migration
             // ForeingKeys
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->foreignId('customization_id')->default(0)->constrained()->onDelete('cascade');
-            $table->foreignId('order_id')->constrained()->onDelete('cascade');
-
             $table->timestamps();
         });
     }

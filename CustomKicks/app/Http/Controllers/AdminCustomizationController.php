@@ -75,7 +75,7 @@ class AdminCustomizationController extends Controller
         $customization->setDesign($request->input('design'));
         $customization->setPattern($request->input('pattern'));
         $customization->setImage($request->input('image'));
-        if ($request->hasFile('image')) {
+        if ($request->hasFile(key: 'image')) {
             $path = $request->file('image')->store('customizations', 'public');
             $customization->setImage($path);
         }

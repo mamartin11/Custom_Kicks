@@ -18,7 +18,7 @@ class Order extends Model
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      */
 
-    protected $fillable = ['total', 'order_date', 'user_id'];
+    protected $fillable = ['total', 'order_date', 'user_id', 'item_ids'];
     public static function validate($request)
     {
         $request->validate([
@@ -51,6 +51,16 @@ class Order extends Model
         $this->attributes['order_date'] = $orderDate;
     }
 
+    public function setItemIds(array $itemIds): void
+    {
+        $this->attributes['item_ids'] = json_encode($itemIds);
+    }
+ 
+    public function getItemIds(): array
+    {
+        return json_decode($this->attributes['item_ids'], true) ?? [];
+    }
+
     public function getCreatedAt()
     {
         return $this->attributes['created_at'];
@@ -61,7 +71,7 @@ class Order extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function item(): HasMany
+    public function items(): HasMany
     {
         return $this->hasMany(Item::class);
     }
