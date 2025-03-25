@@ -1,10 +1,9 @@
 <?php
-
+// Jacobo Restrepo
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -15,13 +14,13 @@ class OrderController extends Controller
         $userBudget = auth()->user()->budget ?? 0;
         $remainingBudget = $userBudget - $total;
 
-        $order = new Order();
+        $order = new Order;
         $order->setTotal($total);
-        $order->setOrderDate(now()->toDateString()); // Guardar fecha actual como `order_date`
-        $order->user_id = auth()->user()->id; // Guardar ID del usuario autenticado
+        $order->setOrderDate(now()->toDateString());
+        $order->user_id = auth()->user()->id;
         $order->setDetails($cartItems);
         $order->save();
-        
+
         return view('order.checkout', [
             'title' => 'Order Summary',
             'items' => $cartItems,
@@ -30,5 +29,4 @@ class OrderController extends Controller
             'remainingBudget' => $remainingBudget,
         ]);
     }
-
 }

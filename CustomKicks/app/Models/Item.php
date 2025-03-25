@@ -1,5 +1,6 @@
 <?php
-
+// Santiago Rodriguez
+// Jacobo Restrepo
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,18 +8,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
-      /**
+    /**
      * ATTRIBUTES
      * $this->attributes['id'] - int - contains the order primary key (id)
      * $this->attributes['subtotal'] - int - contains the price of each item
      * $this->attributes['product_id'] - int - contains the product id
      * $this->attributes['customization_id'] - int - contains the customization id
-     * $this->attributes['order_id'] - int - contains the order id
      * $this->attributes['created_at'] - timestamp - contains the item creation date
      * $this->attributes['updated_at'] - timestamp - contains the item update date
      */
-    
-    protected $fillable = ['subtotal', 'product_id', 'customization_id', 'order_id'];
+    protected $fillable = ['subtotal', 'product_id', 'customization_id'];
 
     public static function validations($request)
     {

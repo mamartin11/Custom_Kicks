@@ -1,5 +1,5 @@
 <?php
-
+// Miguel
 return [
     'title' => 'Custom Kicks - Inicio',
     'subtitle' => 'Sneakers únicos para personas únicas',

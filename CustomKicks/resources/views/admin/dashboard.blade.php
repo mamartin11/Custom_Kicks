@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<!-- Miguel -->
 @section('content')
 <html lang="es">
 <head>

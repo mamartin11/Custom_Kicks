@@ -1,3 +1,4 @@
+// Jacobo
 document.addEventListener('DOMContentLoaded', function () {
     const spinButton = document.getElementById('spinButton');
     const wheel = document.getElementById('wheel');

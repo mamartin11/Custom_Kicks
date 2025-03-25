@@ -1,5 +1,5 @@
 <?php
-
+//Miguel Angel Martinez
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,15 +8,16 @@ class Product extends Model
 {
     /**
      * ATTRIBUTES
-     * $this->attributes['id'] - int - contains the category primary key (id)
-     * $this->attributes['name'] - string - contains the category name
-     * $this->attributes['price'] - string - contains the category description
-     * $this->attributes['description'] - int - contains the category primary key (id)
-     * $this->attributes['brand'] - int - contains the category primary key (id)
-     * $this->attributes['size'] - int - contains the category primary key (id)
-     * $this->attributes['quantity'] - int - contains the category primary key (id)
-     * $this->attributes['created_at'] - timestamp - contains the category creation date
-     * $this->attributes['updated_at'] - timestamp - contains the category update date
+     * $this->attributes['id'] - int - contains the product primary key (id)
+     * $this->attributes['name'] - string - contains the product name
+     * $this->attributes['price'] - string - contains the product price
+     * $this->attributes['description'] - int - contains the product description
+     * $this->attributes['brand'] - string - contains the product brand
+     * $this->attributes['size'] - float - contains the product size
+     * $this->attributes['quantity'] - int - contains the product quantity
+     * $this->attributes['image'] - string - contains the product image path
+     * $this->attributes['created_at'] - timestamp - contains the product creation date
+     * $this->attributes['updated_at'] - timestamp - contains the product last update date
      */
     public static function validate($request)
     {
@@ -34,11 +35,6 @@ class Product extends Model
     public function getId(): int
     {
         return $this->attributes['id'];
-    }
-
-    public function setId($id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getName(): string
@@ -116,18 +112,8 @@ class Product extends Model
         return $this->attributes['created_at'];
     }
 
-    public function setCreatedAt($createdAt)
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
     public function getUpdatedAt()
     {
         return $this->attributes['updated_at'];
-    }
-
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->attributes['updated_at'] = $updatedAt;
     }
 }

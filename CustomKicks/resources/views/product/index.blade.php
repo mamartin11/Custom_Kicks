@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<!-- Miguel, Santiago-->
 @section('title', __('product/index.title'))
 
 @section('subtitle', __('product/index.subtitle'))

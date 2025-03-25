@@ -1,3 +1,4 @@
+// Jacobo
 function animateCount({ from, to, duration = 2, separator = ',', direction = 'down', onEnd }) {
     const element = document.getElementById('counter');
     const start = performance.now();

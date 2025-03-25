@@ -1,14 +1,13 @@
 <?php
-
+// Nicolas, Jacobo, Miguel, Santiago
 use App\Http\Controllers\AdminCustomizationController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-// Página principal
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::controller(ProductController::class)->group(function () {
@@ -16,9 +15,6 @@ Route::controller(ProductController::class)->group(function () {
     Auth::routes();
 });
 
-
-
-// Productos - Admin
 Route::controller(AdminProductController::class)->group(function () {
     Route::get('/admin/products', 'index')->name('admin.dash');
     Route::get('/admin/products/create', 'create')->name('product.create');
@@ -28,7 +24,6 @@ Route::controller(AdminProductController::class)->group(function () {
     Route::get('/admin/product/{id}', 'destroy')->name('product.destroy');
 });
 
-// Customizations - Admin
 Route::controller(AdminCustomizationController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin.customizations.dashboard');
     Route::get('/admin/customizations/edit/{id}', 'edit')->name('admin.customizations.edit');
@@ -38,14 +33,16 @@ Route::controller(AdminCustomizationController::class)->group(function () {
     Route::post('/admin/customizations/store', 'store')->name('admin.customizations.store');
 });
 
-// Estas son las de item (Nico)
-Route::post('/cart/save', [ItemController::class, 'saveItemsToDatabase'])->name('item.save');
-Route::get('/product/{id}', [ItemController::class, 'show'])->name('item.show');
-Route::post('/product/customize', [ItemController::class, 'applyCustomization'])->name('item.apply');
-Route::post('/items', [ItemController::class, 'store'])->name('items.store');
-Route::get('/items/list', [ItemController::class, 'list'])->name('item.list');
-Route::delete('/items/cart/{index}', [ItemController::class, 'removeFromCart'])->name('item.remove');
-Route::delete('/items/cart', [ItemController::class, 'clearCart'])->name('item.clear');
+Route::controller(ItemController::class)->group(function () {
+    Route::post('/cart/save', 'saveItemsToDatabase')->name('item.save');
+    Route::get('/product/{id}', 'show')->name('item.show');
+    Route::post('/product/customize', 'applyCustomization')->name('item.apply');
+    Route::post('/items', 'store')->name('items.store');
+    Route::get('/items/list', 'list')->name('item.list');
+    Route::delete('/items/cart/{index}', 'removeFromCart')->name('item.remove');
+    Route::delete('/items/cart', 'clearCart')->name('item.clear');
+});
 
-//Order
-Route::get('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/order/checkout', 'checkout')->name('order.checkout');
+});

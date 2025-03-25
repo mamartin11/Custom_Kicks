@@ -14,9 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->json('item_ids')->nullable(); // Guardar los IDs de los ítems en formato JSON
-        });
+        Schema::rename('item', 'items'); // Renombrar la tabla
     }
 
     /**
@@ -24,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('item_ids');
-        });
+        Schema::rename('items', 'item'); // Revertir en caso de rollback
     }
 };

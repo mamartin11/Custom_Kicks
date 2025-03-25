@@ -1,5 +1,5 @@
 <?php
-
+//Miguel
 return [
     'title' => 'Editar Customización',
     'color' => 'Color',

@@ -1,4 +1,7 @@
 <?php
+//Jacobo Restrepo
+//Nicolas Hurtado
+
 
 namespace App\Models;
 
@@ -13,12 +16,13 @@ class Order extends Model
      * $this->attributes['id'] - int - contains the order primary key (id)
      * $this->attributes['total'] - int - contains the total amount of the order
      * $this->attributes['user_id'] - int - contains the user id
+     * $this->attributes['details'] - array - contains the order details
      * $this->attributes['order_date'] - date - contains the order date
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      */
+    protected $fillable = ['total', 'order_date', 'user_id', 'details'];
 
-    protected $fillable = ['total', 'order_date', 'user_id', 'item_ids'];
     public static function validate($request)
     {
         $request->validate([
@@ -55,7 +59,7 @@ class Order extends Model
     {
         $this->attributes['details'] = json_encode($details);
     }
- 
+
     public function getDetails(): array
     {
         return json_decode($this->attributes['details'], true) ?? [];

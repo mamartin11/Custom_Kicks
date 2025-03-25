@@ -1,5 +1,5 @@
 <?php
-
+// Nicolas
 return [
     'title' => 'Panel de Administración - Customizaciones',
     'subtitle' => 'Gestiona las customizaciones del sistema.',

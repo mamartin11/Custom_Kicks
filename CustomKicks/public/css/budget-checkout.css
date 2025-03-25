@@ -1,4 +1,6 @@
 @media print {
+
+    /*Jacobo R*/
     body * {
         visibility: hidden;
     }

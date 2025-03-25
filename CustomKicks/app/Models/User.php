@@ -1,5 +1,6 @@
 <?php
-
+// Santiago Rodriguez
+// Miguel Angel Martinez
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;

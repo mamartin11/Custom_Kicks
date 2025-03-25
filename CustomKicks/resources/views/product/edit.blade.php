@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<!-- Miguel-->
 @section('title', __('product/edit.title'))
 
 @section('subtitle', __('product/edit.subtitle'))

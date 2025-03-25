@@ -1,5 +1,5 @@
 <!doctype html>
-
+<!-- Miguel-->
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,7 +14,6 @@
 
 <body>
 
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         
@@ -59,7 +58,6 @@
         </div>
     </div>
 </nav>
-<!-- End Navbar -->
 
 <header class="masthead bg-primary text-black text-center py-4">
     <div class="container d-flex align-items-center flex-column">
