@@ -51,14 +51,14 @@ class Order extends Model
         $this->attributes['order_date'] = $orderDate;
     }
 
-    public function setItemIds(array $itemIds): void
+    public function setDetails(array $details): void
     {
-        $this->attributes['item_ids'] = json_encode($itemIds);
+        $this->attributes['details'] = json_encode($details);
     }
  
-    public function getItemIds(): array
+    public function getDetails(): array
     {
-        return json_decode($this->attributes['item_ids'], true) ?? [];
+        return json_decode($this->attributes['details'], true) ?? [];
     }
 
     public function getCreatedAt()

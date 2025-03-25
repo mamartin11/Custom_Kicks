@@ -19,7 +19,7 @@ class OrderController extends Controller
         $order->setTotal($total);
         $order->setOrderDate(now()->toDateString()); // Guardar fecha actual como `order_date`
         $order->user_id = auth()->user()->id; // Guardar ID del usuario autenticado
-        $order->setItemIds($cartItems);
+        $order->setDetails($cartItems);
         $order->save();
         
         return view('order.checkout', [

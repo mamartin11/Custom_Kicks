@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         confirmBtn.classList.remove('btn-primary');
         confirmBtn.classList.add('btn-dark');
-        confirmBtn.textContent = 'Print PDF';
+        confirmBtn.textContent = 'Imprimir PDF';
         confirmBtn.removeAttribute('data-bs-toggle');
         confirmBtn.removeAttribute('data-bs-target');
         confirmBtn.setAttribute('onclick', "window.print()");
