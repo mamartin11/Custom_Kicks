@@ -25,6 +25,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home.index') }}">{{ __('layout/app.nav_home') }}</a>
                 </li>
@@ -41,6 +42,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('item.list') }}">{{ __('layout/app.nav_cart') }}</a>
                 </li>
+
+
+
+
+                @if(isset($usdToCop))
+                    <li class="nav-item text-white d-flex align-items-center ms-3">
+                        <span class="nav-link disabled text-success fw-bold">
+                            USD → COP: <strong>{{ number_format($usdToCop, 2) }}</strong>
+                        </span>
+                    </li>
+                @endif
 
                 <div class="vr bg-white mx-2 d-none d-lg-block"></div> 
                 @guest 
