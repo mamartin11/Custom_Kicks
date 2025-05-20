@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalSection = document.getElementById('totalSection'); // Sección de "Total"
     const discountInfo = document.getElementById('discount-info');
     const confirmBtn = document.getElementById('confirmBtn');
+    const counterElement = document.getElementById('counter');
+    const userBudget = parseFloat(document.getElementById('counter').getAttribute('data-budget') || '0');
  
     let angles = [0, 90, 180, 270];
     let discounts = [10, 20, 50, 0]; // 0 significa "No ganaste"
@@ -32,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
             let totalBefore = parseFloat(totalBeforeDiscount.textContent.replace(',', ''));
             let newTotal = totalBefore - (totalBefore * selectedDiscount / 100);
             totalAfterDiscount.textContent = newTotal.toFixed(2);
+            
+            // Update remaining budget based on discounted price
+            const userBudgetValue = parseFloat(document.querySelector('[data-budget]').getAttribute('data-budget'));
+            const newRemainingBudget = userBudgetValue - newTotal;
+            counterElement.textContent = newRemainingBudget.toFixed(2);
  
             // Ocultar "Total" y mostrar información de descuento
             totalSection.classList.add('d-none');

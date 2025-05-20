@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<!-- Jacobo-->
+
 @section('title', $viewData['title'])
 
 @section('subtitle', $viewData['subtitle'])
@@ -17,10 +17,10 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $viewData['product']->getName() }}</h5>
                 <p class="card-text">
-                        <p><strong>{{__('item/index.price')}}:</strong> {{ $viewData['product']->getPrice() }}</p>
-                        <p><strong>{{__('item/index.description')}}:</strong> {{ $viewData['product']->getDescription() }}</p>
-                        <p><strong>{{__('item/index.brand')}}:</strong> {{ $viewData['product']->getBrand() }}</p>
-                        <p><strong>{{__('item/index.size')}}:</strong> {{ $viewData['product']->getSize() }}</p>
+                    <p><strong>Price:</strong> ${{ $viewData['product']->getPrice() }}</p>
+                    <p><strong>Description:</strong> {{ $viewData['product']->getDescription() }}</p>
+                    <p><strong>Brand:</strong> {{ $viewData['product']->getBrand() }}</p>
+                    <p><strong>Size:</strong> {{ $viewData['product']->getSize() }}</p>
                 </p>
             </div>
         </div>
@@ -30,18 +30,16 @@
 @if(session('success'))
     <div class="alert alert-success text-center">
         <p>{{ session('success') }}</p>
-        <p><strong>{{ __('item/index.color') }}:</strong> {{ session('selected_color') }}</p>
-        <p><strong>{{ __('item/index.design') }}:</strong> {{ session('selected_design') }}</p>
-        <p><strong>{{ __('item/index.pattern') }}:</strong> {{ session('selected_pattern') }}</p>
+        <p><strong>Color:</strong> {{ session('selected_color') }}</p>
+        <p><strong>Design:</strong> {{ session('selected_design') }}</p>
+        <p><strong>Pattern:</strong> {{ session('selected_pattern') }}</p>
     </div>
 @endif
 
-<form method="POST" action="{{ route('items.store') }}">
+<form method="POST" action="{{ route('cart.add') }}">
     @csrf
     <input type="hidden" name="product_id" value="{{ $viewData['product']->getId() }}">
     <input type="hidden" name="customization_id" id="customization-id">
-    <input type="hidden" name="order_id" value="1">
-    <input type="hidden" name="product_price" value="{{ $viewData['product']->getPrice() }}">
 
     <div class="carousel-section">
         <div class="coverflow">
@@ -64,7 +62,7 @@
         <div class="carousel-controls">
             <button type="button" id="prevBtn" class="control-btn">⟨</button>
             <button type="submit" class="btn btn-primary submit-btn" disabled id="submit-btn">
-                {{ __('item/index.use_customization') }}
+                Add to Cart
             </button>
             <button type="button" id="nextBtn" class="control-btn">⟩</button>
         </div>
@@ -73,5 +71,4 @@
 
 <script src="{{ asset('js/customization-carousel.js') }}"></script>
 
-@endsection
-
+@endsection 

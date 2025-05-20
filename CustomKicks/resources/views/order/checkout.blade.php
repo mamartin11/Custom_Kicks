@@ -35,7 +35,7 @@
  
                 <div class='budget-container'>
                     <strong>{{ __('order/checkout.remaining_budget') }}:</strong>
-                    <div id='counter' class='count-up-text'>{{ number_format($remainingBudget, 2) }}</div>
+                    <div id='counter' class='count-up-text' data-budget="{{ $userBudget }}">{{ number_format($remainingBudget, 2) }}</div>
                 </div>
             </div>
         @else

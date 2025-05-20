@@ -83,12 +83,12 @@
         <div class="col-md-4">
             <div class="card shadow-lg border-0 rounded-3 overflow-hidden product-card">
                 <div class="image-container">
-                    <img src="{{ asset('storage/' . $product->getImage()) }}" class="card-img-top" style="max-width: 60%;>
+                    <img src="{{ asset('storage/' . $product->getImage()) }}" class="card-img-top" style="max-width: 60%">
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title fw-bold">{{ $product->getName() }}</h5>
                     <p class="card-text text-success fw-bold fs-5">${{ number_format($product->getPrice(), 2) }}</p>
-                    <a href="{{ route('item.show', $product->getId()) }}" class="btn btn-dark w-100">{{__('home/index.newest_button')}}</a>
+                    <a href="{{ route('product.show', $product->getId()) }}" class="btn btn-dark w-100">{{__('home/index.newest_button')}}</a>
                 </div>
             </div>
         </div>

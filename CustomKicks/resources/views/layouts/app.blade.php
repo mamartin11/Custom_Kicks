@@ -32,15 +32,18 @@
                 @auth
                     @if(auth()->user()->role === 'admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.dash') }}">{{ __('layout/app.nav_admin') }}</a>
+                            <a class="nav-link" href="{{ route('admin.products.dashboard') }}">{{ __('layout/app.nav_admin') }}</a>
                         </li>
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('order.my-orders') }}">{{ __('layout/app.nav_my_orders') }}</a>
+                    </li>
                 @endauth
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('product.index') }}">{{ __('layout/app.nav_products') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('item.list') }}">{{ __('layout/app.nav_cart') }}</a>
+                    <a class="nav-link" href="{{ route('cart.list') }}">{{ __('layout/app.nav_cart') }}</a>
                 </li>
 
 

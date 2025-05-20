@@ -32,6 +32,11 @@ class Order extends Model
         ]);
     }
 
+    public function getId(): int
+    {
+        return $this->attributes['id'];
+    }
+
     public function getTotal(): int
     {
         return $this->attributes['total'];

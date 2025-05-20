@@ -2,13 +2,17 @@
 // Miguel Angel Martinez, Santiago
 namespace App\Http\Controllers;
 
+use App\Models\Customization;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(Request $request): view
+    /**
+     * Display a listing of products with optional filtering
+     */
+    public function index(Request $request): View
     {
         $query = Product::query();
 
@@ -36,6 +40,23 @@ class ProductController extends Controller
         $viewData['products'] = $query->get();
         $viewData['brands'] = $brands;
 
-        return view('product.index')->with('viewData', $viewData);
+        return view('products.index')->with('viewData', $viewData);
+    }
+
+    /**
+     * Display the specified product with customization options
+     */
+    public function show(string $id): View
+    {
+        $viewData = [];
+
+        $product = Product::findOrFail($id);
+
+        $viewData['title'] = $product->getName();
+        $viewData['subtitle'] = $product->getName();
+        $viewData['product'] = $product;
+        $viewData['customizations'] = Customization::all();
+
+        return view('products.show')->with('viewData', $viewData);
     }
 }
