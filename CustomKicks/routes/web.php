@@ -49,6 +49,12 @@ Route::prefix('admin')
             Route::get('/product/{id}', 'destroy')->name('products.destroy');
         });
 
+        // Admin Order Routes
+        Route::controller(OrderController::class)->group(function () {
+            Route::get('/orders', 'index')->name('orders.dashboard');
+            Route::post('/orders/{order}/complete', 'complete')->name('orders.complete');
+        });
+
         // Admin Customization Routes
         Route::controller(AdminCustomizationController::class)->group(function () {
             Route::get('/', 'index')->name('customizations.dashboard');

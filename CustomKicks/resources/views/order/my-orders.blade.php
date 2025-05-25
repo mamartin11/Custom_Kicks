@@ -14,6 +14,7 @@
                         <th>{{ __('order/my-orders.id') }}</th>
                         <th>{{ __('order/my-orders.date') }}</th>
                         <th>{{ __('order/my-orders.total') }}</th>
+                        <th>Estado</th>
                         <th>{{ __('order/my-orders.details') }}</th>
                     </tr>
                 </thead>
@@ -23,6 +24,13 @@
                             <td>{{ $order->getId() }}</td>
                             <td>{{ $order->getOrderDate() }}</td>
                             <td>${{ number_format($order->getTotal(), 2) }}</td>
+                            <td>
+                                @if(($order->status ?? $order->getStatus()) === 'completed')
+                                    <span class="badge bg-success">Completada</span>
+                                @else
+                                    <span class="badge bg-warning">Pendiente</span>
+                                @endif
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#orderDetails{{ $order->getId() }}">
                                     {{ __('order/my-orders.view_details') }}

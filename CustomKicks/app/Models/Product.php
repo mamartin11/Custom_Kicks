@@ -19,6 +19,8 @@ class Product extends Model
      * $this->attributes['created_at'] - timestamp - contains the product creation date
      * $this->attributes['updated_at'] - timestamp - contains the product last update date
      */
+    protected $fillable = ['name', 'price', 'description', 'brand', 'size', 'quantity', 'image'];
+
     public static function validate($request)
     {
         $request->validate([
@@ -30,6 +32,7 @@ class Product extends Model
             'quantity' => 'required|integer',
             'image' => 'nullable',
         ]);
+        return true;
     }
 
     public function getId(): int

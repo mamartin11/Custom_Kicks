@@ -17,7 +17,7 @@ class Item extends Model
      * $this->attributes['created_at'] - timestamp - contains the item creation date
      * $this->attributes['updated_at'] - timestamp - contains the item update date
      */
-    protected $fillable = ['subtotal', 'product_id', 'customization_id'];
+    protected $fillable = ['subtotal', 'product_id', 'customization_id', 'order_id'];
 
     public static function validations($request)
     {

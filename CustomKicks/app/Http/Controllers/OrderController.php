@@ -67,4 +67,32 @@ class OrderController extends Controller
             'orders' => $orders,
         ]);
     }
+
+    /**
+     * Display the admin orders dashboard
+     */
+    public function index(): View
+    {
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para acceder a esta sección.');
+        }
+
+        $orders = Order::with(['user', 'items'])->orderBy('created_at', 'desc')->get();
+        return view('order.index', [
+            'title' => 'Gestión de Órdenes',
+            'orders' => $orders
+        ]);
+    }
+
+    /**
+     * Mark an order as completed
+     */
+    public function complete(Order $order): RedirectResponse
+    {
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            abort(403, 'No tienes permisos para realizar esta acción.');
+        }
+        $order->markAsCompleted();
+        return redirect()->route('admin.orders.dashboard')->with('success', 'Orden marcada como completada');
+    }
 }

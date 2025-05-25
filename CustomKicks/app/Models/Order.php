@@ -21,7 +21,7 @@ class Order extends Model
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      */
-    protected $fillable = ['total', 'order_date', 'user_id', 'details'];
+    protected $fillable = ['total', 'order_date', 'user_id', 'details', 'status'];
 
     public static function validate($request)
     {
@@ -30,6 +30,7 @@ class Order extends Model
             'order_date' => 'required|date',
             'user_id' => 'required|integer',
         ]);
+        return true;
     }
 
     public function getId(): int
@@ -88,5 +89,21 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function markAsCompleted(): void
+    {
+        $this->attributes['status'] = 'completed';
+        $this->save();
+    }
+
+    public function getStatus(): string
+    {
+        return $this->attributes['status'] ?? 'pending';
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->attributes['status'] = $status;
     }
 }

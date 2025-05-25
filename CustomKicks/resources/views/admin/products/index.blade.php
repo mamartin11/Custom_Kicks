@@ -9,7 +9,10 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span>Product Management</span>
-                    <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">Add New</a>
+                    <div>
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">Add New</a>
+                        <a href="{{ route('admin.customizations.add') }}" class="btn btn-sm btn-success ms-2">Crear Customización</a>
+                    </div>
                 </div>
 
                 <div class="card-body">

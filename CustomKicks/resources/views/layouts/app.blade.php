@@ -34,6 +34,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.products.dashboard') }}">{{ __('layout/app.nav_admin') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.orders.dashboard') }}">Órdenes</a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.customizations.add') }}">Crear Customización</a>
+                        </li> --}}
                     @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('order.my-orders') }}">{{ __('layout/app.nav_my_orders') }}</a>
