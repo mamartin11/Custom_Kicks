@@ -41,31 +41,31 @@
                             <td>${{ number_format($item['subtotal'], 2) }}</td>
                             <td>
                                 <form action="{{ route('cart.remove', $index) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
+                        @csrf
+                        @method('DELETE')
                                     <button class="btn btn-sm btn-danger">{{ __('cart/list.remove') }}</button>
-                                </form>
+                    </form>
                             </td>
                         </tr>
-                    @endforeach
+            @endforeach
                 </tbody>
             </table>
         </div>
 
         <div class="row mt-4">
             <div class="col-md-6">
-                <form action="{{ route('cart.clear') }}" method="POST">
-                    @csrf
-                    @method('DELETE')
+        <form action="{{ route('cart.clear') }}" method="POST">
+            @csrf
+            @method('DELETE')
                     <button class="btn btn-warning w-100">{{ __('cart/list.clear_cart') }}</button>
-                </form>
+        </form>
             </div>
             <div class="col-md-6">
-                @auth
+        @auth
                     <a href="{{ route('order.checkout') }}" class="btn btn-success w-100">
                         {{ __('cart/list.checkout') }}
-                    </a>
-                @else
+            </a>
+        @else
                     <p>{{ __('cart/list.login_required') }} <a href="{{ route('login') }}">{{ __('cart/list.login') }}</a></p>
                     <p>{{ __('cart/list.no_account') }} <a href="{{ route('register') }}">{{ __('cart/list.register_here') }}</a>.</p>
                 @endauth

@@ -9,7 +9,10 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span>{{ __('admin/products.management') }}</span>
-                    <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">{{ __('admin/products.add_new') }}</a>
+                    <div>
+                        <a href="{{ route('admin.customizations.dashboard') }}" class="btn btn-sm btn-secondary me-2">{{ __('admin/customizations.customizations') }}</a>
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-primary">{{ __('admin/products.add_new') }}</a>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -62,7 +65,7 @@
                                                 <a href="{{ route('admin.products.edit', $product->getId()) }}" 
                                                    class="btn btn-sm btn-primary">{{ __('admin/products.edit') }}</a>
                                                 <a href="{{ route('admin.products.destroy', $product->getId()) }}" 
-                                                   class="btn btn-sm btn-danger"
+                                                   class="btn btn-sm btn-danger" 
                                                    onclick="return confirm('{{ __('admin/products.delete_confirm') }}')">{{ __('admin/products.delete') }}</a>
                                             </div>
                                         </td>

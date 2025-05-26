@@ -9,6 +9,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\OrderTrackingController;
 
 // Auth routes
 Route::middleware(['App\Http\Middleware\Locale'])->group(function () {
@@ -36,8 +38,11 @@ Route::middleware(['App\Http\Middleware\Locale'])->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get('/order/checkout', 'checkout')->name('order.checkout');
         Route::get('/my-orders', 'myOrders')->name('order.my-orders');
-        Route::post('/order/update-discount', 'updateDiscount')->name('order.update-discount');
     });
+
+    // Rutas de seguimiento de pedidos
+    Route::get('/order-tracking', [ShippingController::class, 'showTracking'])->name('order.tracking');
+    Route::get('/api/orders/{orderId}/tracking', [ShippingController::class, 'getTrackingInfo']);
 
     // Admin Routes
     Route::prefix('admin')
@@ -56,7 +61,7 @@ Route::middleware(['App\Http\Middleware\Locale'])->group(function () {
 
             // Admin Customization Routes
             Route::controller(AdminCustomizationController::class)->group(function () {
-                Route::get('/', 'index')->name('customizations.dashboard');
+                Route::get('/customizations', 'index')->name('customizations.dashboard');
                 Route::get('/customizations/edit/{id}', 'edit')->name('customizations.edit');
                 Route::post('/customizations/update/{id}', 'update')->name('customizations.update');
                 Route::get('/customizations/delete/{id}', 'delete')->name('customizations.delete');
@@ -65,4 +70,6 @@ Route::middleware(['App\Http\Middleware\Locale'])->group(function () {
             });
         });
 
+    Route::post('/api/shipping/calculate-cost', [ShippingController::class, 'calculateCost'])->name('shipping.calculate-cost');
+    Route::post('/api/shipping/confirm-type', [ShippingController::class, 'confirmShippingType'])->name('shipping.confirm-type');
 });

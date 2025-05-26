@@ -13,8 +13,7 @@ return [
     'design' => 'Diseño',
     'pattern' => 'Patrón',
     'subtotal' => 'Subtotal',
-    'discount' => 'Descuento',
-    'close' => 'Cerrar',
-    'no_orders' => 'No tienes órdenes aún.',
-    'view_products' => 'Ver Productos',
+    'discount' => 'Descuento obtenido',
+    'type' => 'Tipo de Envío',
+    'status' => 'Estado'
 ]; 

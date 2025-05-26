@@ -17,4 +17,7 @@ return [
     'actions' => 'Acciones',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
+    'management' => 'Gestión de Productos',
+    'add_new' => 'Agregar nuevo producto',
+
 ]; 

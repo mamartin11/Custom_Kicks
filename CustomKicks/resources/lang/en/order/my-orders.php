@@ -13,8 +13,7 @@ return [
     'design' => 'Design',
     'pattern' => 'Pattern',
     'subtotal' => 'Subtotal',
-    'discount' => 'Discount',
-    'close' => 'Close',
-    'no_orders' => 'You don\'t have any orders yet.',
-    'view_products' => 'View Products',
+    'discount' => 'Discount obtained',
+    'type' => 'Shipping Type',
+    'status' => 'Status'
 ]; 

@@ -8,4 +8,4 @@ return [
     'already_spun' => '¡Ya giraste la ruleta!',
     'discount_result' => '¡Obtuviste un descuento del',
     'no_discount' => '¡Suerte la próxima vez!',
-]; 
+];
