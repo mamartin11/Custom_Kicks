@@ -1,5 +1,7 @@
 <?php
-//Nicolas Hurtado A
+
+// Nicolas Hurtado A
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -19,7 +21,7 @@ class AdminCustomizationController extends Controller
         if (Auth::user()->role !== 'admin') {
             abort(403, 'You do not have permission to access this page.');
         }
-        
+
         $viewData = [];
         $viewData['customizations'] = Customization::all();
 
@@ -31,13 +33,16 @@ class AdminCustomizationController extends Controller
      */
     public function edit(string $id): View
     {
-        if (Auth::user()->role !== 'admin') {
+        if (Auth::user()->getRole() !== 'admin') {
             abort(403, 'You do not have permission to access this page.');
         }
-        
+
         $customization = Customization::findOrFail($id);
 
-        return view('admin.customizations.edit')->with('customization', $customization);
+        $viewData = [];
+        $viewData['customization'] = $customization;
+
+        return view('admin.customizations.edit')->with('viewData', $viewData);
     }
 
     /**
@@ -48,13 +53,13 @@ class AdminCustomizationController extends Controller
         if (Auth::user()->role !== 'admin') {
             abort(403, 'You do not have permission to access this page.');
         }
-        
+
         $customization = Customization::findOrFail($id);
 
         $customization->setColor($request->input('color'));
         $customization->setDesign($request->input('design'));
         $customization->setPattern($request->input('pattern'));
-        
+
         $customization->save();
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customization updated successfully.');
@@ -68,7 +73,7 @@ class AdminCustomizationController extends Controller
         if (Auth::user()->role !== 'admin') {
             abort(403, 'You do not have permission to access this page.');
         }
-        
+
         Customization::destroy($id);
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customization deleted successfully.');
@@ -101,14 +106,14 @@ class AdminCustomizationController extends Controller
         $customization->setColor($request->input('color'));
         $customization->setDesign($request->input('design'));
         $customization->setPattern($request->input('pattern'));
-        
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('customizations', 'public');
             $customization->setImage($path);
         }
-        
+
         $customization->save();
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customization added successfully.');
     }
-} 
+}

@@ -17,4 +17,4 @@ return [
     'pattern' => 'Patrón',
     'subtotal' => 'Subtotal',
     'discount' => 'Descuento obtenido',
-]; 
+];

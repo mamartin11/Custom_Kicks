@@ -1,5 +1,7 @@
 <?php
+
 // Miguel Angel Martinez, Santiago
+
 namespace App\Http\Controllers;
 
 use App\Models\Customization;

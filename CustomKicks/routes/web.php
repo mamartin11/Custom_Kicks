@@ -1,4 +1,5 @@
 <?php
+
 // Nicolas, Jacobo, Miguel, Santiago
 use App\Http\Controllers\Admin\AdminCustomizationController;
 use App\Http\Controllers\Admin\AdminProductController;
@@ -32,6 +33,7 @@ Route::controller(CartController::class)->group(function () {
 Route::controller(OrderController::class)->group(function () {
     Route::get('/order/checkout', 'checkout')->name('order.checkout');
     Route::get('/my-orders', 'myOrders')->name('order.my-orders');
+    Route::post('/order/update-discount', 'updateDiscount')->name('order.update-discount');
 });
 
 // Admin Routes

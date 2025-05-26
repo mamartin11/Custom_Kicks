@@ -1,4 +1,5 @@
 <?php
+
 // Miguel Angel Martinez
 
 namespace App\Http\Controllers\Admin;
@@ -20,7 +21,7 @@ class AdminProductController extends Controller
         if (Auth::user()->role !== 'admin') {
             abort(403, 'You do not have permission to access this page.');
         }
-        
+
         $viewData = [];
         $viewData['products'] = Product::all();
 
@@ -35,7 +36,7 @@ class AdminProductController extends Controller
         if (Auth::user()->role !== 'admin') {
             abort(403, 'You do not have permission to access this page.');
         }
-        
+
         $viewData = [];
         $viewData['title'] = 'Create a product';
 
@@ -50,7 +51,7 @@ class AdminProductController extends Controller
         if (Auth::user()->role !== 'admin') {
             abort(403, 'You do not have permission to access this page.');
         }
-        
+
         Product::validate($request);
 
         $newProduct = new Product;
@@ -67,7 +68,7 @@ class AdminProductController extends Controller
         }
 
         $newProduct->save();
-        
+
         return back()->with('success', 'Your Sneaker has been saved');
     }
 
@@ -97,7 +98,7 @@ class AdminProductController extends Controller
         $viewData = [];
         $product = Product::findOrFail($id);
 
-        $viewData['title'] = 'Edit Product - ' . $product->getName();
+        $viewData['title'] = 'Edit Product - '.$product->getName();
         $viewData['product'] = $product;
 
         return view('admin.products.edit')->with('viewData', $viewData);
@@ -131,4 +132,4 @@ class AdminProductController extends Controller
 
         return redirect()->route('admin.products.dashboard')->with('success', 'Product updated successfully!');
     }
-} 
+}

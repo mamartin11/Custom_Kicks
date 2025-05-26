@@ -6,7 +6,7 @@
 <div class="container mt-4">
     <h1 class="mb-4">{{ __('order/my-orders.heading') }}</h1>
 
-    @if(count($orders) > 0)
+    @if(count($viewData['orders']) > 0)
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -18,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $order)
+                    @foreach($viewData['orders'] as $order)
                         <tr>
                             <td>{{ $order->getId() }}</td>
                             <td>{{ $order->getOrderDate() }}</td>
@@ -52,14 +52,7 @@
                                                     @endforeach
                                                 </ul>
                                                 <div class="text-end">
-                                                    <p><strong>{{ __('order/my-orders.discount') }}: 
-                                                        @php
-                                                            // Obtener un descuento aleatorio entre los posibles valores de la ruleta
-                                                            $discountValues = [0, 10, 20, 50];
-                                                            $randomDiscount = $discountValues[array_rand($discountValues)];
-                                                            echo $randomDiscount . '%';
-                                                        @endphp
-                                                    </strong></p>
+                                                    <p><strong>{{ __('order/my-orders.discount') }}: {{ $order->getDiscount() }}%</strong></p>
                                                     <strong>{{ __('order/my-orders.total') }}: ${{ number_format($order->getTotal(), 2) }}</strong>
                                                 </div>
                                             </div>

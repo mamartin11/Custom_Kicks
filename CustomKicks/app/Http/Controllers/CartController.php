@@ -1,5 +1,7 @@
 <?php
+
 // Created by refactoring ItemController
+
 namespace App\Http\Controllers;
 
 use App\Models\Customization;
@@ -17,10 +19,11 @@ class CartController extends Controller
     {
         $cartItems = session()->get('cart_items', []);
 
-        return view('cart.list', [
-            'title' => 'Your Cart Items',
-            'cartItems' => $cartItems,
-        ]);
+        $viewData = [];
+        $viewData['title'] = 'Your Cart Items';
+        $viewData['cartItems'] = $cartItems;
+
+        return view('cart.list')->with('viewData', $viewData);
     }
 
     /**
@@ -80,4 +83,4 @@ class CartController extends Controller
 
         return redirect()->route('cart.list')->with('success', 'All items removed from cart.');
     }
-} 
+}

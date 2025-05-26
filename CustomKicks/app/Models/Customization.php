@@ -1,5 +1,6 @@
 <?php
-//Nicolas Hurtado A
+
+// Nicolas Hurtado A
 
 namespace App\Models;
 
@@ -9,18 +10,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Customization extends Model
 {
     /**
-     * LUMI USER ATTRIBUTES
+     * ATTRIBUTES
      * $this->attributes['id'] - int - contains the customization primary key (id)
      * $this->attributes['color'] - string - contains the color type
      * $this->attributes['design'] - string - contains the design type
      * $this->attributes['pattern'] - string - contains the pattern type
      * $this->attributes['image'] - string - contains the image path
-     * $this->attributes['created_at'] - timestamp - contains the creaate date
+     * $this->attributes['created_at'] - timestamp - contains the create date
      * $this->attributes['updated_at'] - timestamp - contains the update date
+     *
+     * RELATIONS
+     * $this->items - HasMany - contains the items that use this customization
      */
     protected $fillable = ['color', 'design', 'pattern', 'image'];
 
-    public static function validations($request)
+    public static function validate($request): void
     {
         $request->validate([
             'color' => 'required|string',
@@ -65,12 +69,7 @@ class Customization extends Model
         $this->attributes['pattern'] = $pattern;
     }
 
-    public function items(): HasMany
-    {
-        return $this->hasMany(Item::class, 'customization_id');
-    }
-
-    public function setImage($imagePath): void
+    public function setImage(string $imagePath): void
     {
         $this->attributes['image'] = $imagePath;
     }
@@ -80,13 +79,29 @@ class Customization extends Model
         return $this->attributes['image'];
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->attributes['updated_at'];
+    }
+
+    /**
+     * Get items that use this customization
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class, 'customization_id');
+    }
+
+    /**
+     * Get items for this customization
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

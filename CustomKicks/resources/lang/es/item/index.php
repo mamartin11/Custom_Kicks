@@ -1,5 +1,6 @@
 <?php
-//Miguel
+
+// Miguel
 return [
     'color' => 'Color',
     'design' => 'Diseño',

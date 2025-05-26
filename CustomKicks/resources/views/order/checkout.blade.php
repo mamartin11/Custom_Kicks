@@ -8,9 +8,9 @@
     <div id='print-area'>
         <h1 class='mb-4'>{{ __('order/checkout.subtitle') }}</h1>
  
-        @if(count($items) > 0)
+        @if(count($viewData['items']) > 0)
             <ul class='list-group mb-4'>
-                @foreach($items as $item)
+                @foreach($viewData['items'] as $item)
                     <li class='list-group-item'>
                         <strong>{{ $item['product_name'] }}</strong><br>
                         <small>
@@ -23,19 +23,19 @@
                 @endforeach
             </ul>
             <div class='mb-4 text-center'>
-                <p><strong>{{ __('order/checkout.actual_budget') }}:</strong> ${{ number_format($userBudget, 2) }}</p>
-                <p id='totalSection'><strong>{{ __('order/checkout.total') }}:</strong> $<span id='total'>{{ number_format($total, 2) }}</span></p>
+                <p><strong>{{ __('order/checkout.actual_budget') }}:</strong> ${{ number_format($viewData['userBudget'], 2) }}</p>
+                <p id='totalSection'><strong>{{ __('order/checkout.total') }}:</strong> $<span id='total'>{{ number_format($viewData['total'], 2) }}</span></p>
  
                 {{-- Se oculta hasta que se gire la ruleta --}}
                 <div id='discount-info' class='d-none'>
-                    <p><strong>{{ __('order/checkout.total_before_discount') }}:</strong> ${{ number_format($total, 2) }}</p>
+                    <p><strong>{{ __('order/checkout.total_before_discount') }}:</strong> ${{ number_format($viewData['total'], 2) }}</p>
                     <p><strong>{{ __('order/checkout.discount') }}:</strong> <span id='discountValue'>0</span>%</p>
-                    <p><strong>{{ __('order/checkout.total_after_discount') }}:</strong> $<span id='totalAfterDiscount'>{{ number_format($total, 2) }}</span></p>
+                    <p><strong>{{ __('order/checkout.total_after_discount') }}:</strong> $<span id='totalAfterDiscount'>{{ number_format($viewData['total'], 2) }}</span></p>
                 </div>
  
                 <div class='budget-container'>
                     <strong>{{ __('order/checkout.remaining_budget') }}:</strong>
-                    <div id='counter' class='count-up-text' data-budget="{{ $userBudget }}">{{ number_format($remainingBudget, 2) }}</div>
+                    <div id='counter' class='count-up-text' data-budget="{{ $viewData['userBudget'] }}">{{ number_format($viewData['remainingBudget'], 2) }}</div>
                 </div>
             </div>
         @else
@@ -43,7 +43,7 @@
         @endif
     </div>
  
-    @if(count($items) > 0)
+    @if(count($viewData['items']) > 0)
         <div class='text-end'>
             <button class='btn btn-warning me-2' id='spinWheelBtn' data-bs-toggle='modal' data-bs-target='#discountModal'>
             {{ __('order/checkout.wheel') }}

@@ -35,6 +35,44 @@ document.addEventListener('DOMContentLoaded', function () {
     const message = document.getElementById('confirmationMessage');
 
     confirmYesBtn.addEventListener('click', function () {
+        // Obtener el descuento aplicado
+        const discountValue = document.getElementById('discountValue').textContent || '0';
+        
+        // Enviar el descuento al backend para actualizar la orden y el budget
+        fetch('/order/update-discount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                discount: parseInt(discountValue)
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Descuento y budget actualizados correctamente');
+                
+                // Actualizar el mensaje de confirmación con información del budget
+                const confirmationDiv = document.getElementById('confirmationMessage');
+                confirmationDiv.innerHTML = `
+                    <strong>¡Tu orden ha sido confirmada!</strong><br>
+                    <small>
+                        Total original: $${data.original_total ? data.original_total.toFixed(2) : '0.00'}<br>
+                        Descuento aplicado: ${discountValue}% (-$${data.discount_amount ? data.discount_amount.toFixed(2) : '0.00'})<br>
+                        Total final: $${data.final_total ? data.final_total.toFixed(2) : '0.00'}<br>
+                        <strong>Tu nuevo budget: $${data.new_budget ? data.new_budget.toFixed(2) : '0.00'}</strong>
+                    </small>
+                `;
+            } else {
+                console.error('Error al actualizar:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
         const modalEl = document.getElementById('confirmModal');
         const modalInstance = bootstrap.Modal.getInstance(modalEl);
         modalInstance.hide();

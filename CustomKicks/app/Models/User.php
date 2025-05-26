@@ -1,6 +1,8 @@
 <?php
+
 // Santiago Rodriguez
 // Miguel Angel Martinez
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -26,6 +28,9 @@ class User extends Authenticatable
      * $this->attributes['remember_token'] - string - contains the remember token
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
+     *
+     * RELATIONS
+     * $this->orders - HasMany - contains the orders placed by this user
      */
 
     /**
@@ -73,6 +78,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Validate user data
+     */
+    public static function validate($request): void
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'budget' => 'nullable|numeric|min:0',
+            'role' => 'nullable|in:admin,customer',
+        ]);
     }
 
     /**
@@ -157,7 +176,7 @@ class User extends Authenticatable
 
     /**
      * Get user's orders
-     * 
+     *
      * @return HasMany Orders placed by this user
      */
     public function orders(): HasMany

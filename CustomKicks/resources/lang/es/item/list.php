@@ -1,5 +1,6 @@
 <?php
-//Miguel
+
+// Miguel
 return [
     'title' => 'Carrito - Custom Kicks',
     'subtitle' => 'Tu carrito',

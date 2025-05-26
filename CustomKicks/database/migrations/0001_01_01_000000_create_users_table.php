@@ -1,4 +1,5 @@
 <?php
+
 // Santiago Rodriguez
 // Miguel Angel Martinez
 use Illuminate\Database\Migrations\Migration;

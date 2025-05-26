@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', $title)
+@section('title', $viewData['title'])
 
 @section('content')
 <div class="container mt-4">
-    <h1 class="mb-3">Your Cart</h1>
+    <h1 class="mb-3">{{ __('cart/list.title') }}</h1>
 
     @if(session('success'))
         <div class="alert alert-success text-center">
@@ -18,47 +18,61 @@
         </div>
     @endif
 
-    @if(count($cartItems) > 0)
-        <ul class="list-group mb-4">
-            @foreach($cartItems as $index => $item)
-                <li class="list-group-item d-flex justify-content-between align-items-center flex-column flex-md-row">
-                    <div>
-                        <strong>{{ $item['product_name'] }}</strong><br>
-                        <small>
-                            Color: {{ $item['customization']['color'] ?? 'N/A' }} |
-                            Design: {{ $item['customization']['design'] ?? 'N/A' }} |
-                            Pattern: {{ $item['customization']['pattern'] ?? 'N/A' }}<br>
-                            Subtotal: ${{ $item['subtotal'] }}
-                        </small>
-                    </div>
+    @if(!empty($viewData['cartItems']))
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ __('cart/list.product') }}</th>
+                        <th>{{ __('cart/list.customization') }}</th>
+                        <th>{{ __('cart/list.price') }}</th>
+                        <th>{{ __('cart/list.actions') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($viewData['cartItems'] as $index => $item)
+                        <tr>
+                            <td>{{ $item['product_name'] }}</td>
+                            <td>
+                                <strong>{{ __('cart/list.color') }}:</strong> {{ $item['customization']['color'] }}<br>
+                                <strong>{{ __('cart/list.design') }}:</strong> {{ $item['customization']['design'] }}<br>
+                                <strong>{{ __('cart/list.pattern') }}:</strong> {{ $item['customization']['pattern'] }}
+                            </td>
+                            <td>${{ number_format($item['subtotal'], 2) }}</td>
+                            <td>
+                                <form action="{{ route('cart.remove', $index) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">{{ __('cart/list.remove') }}</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-                    <form action="{{ route('cart.remove', $index) }}" method="POST" class="mt-2 mt-md-0">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger">Remove</button>
-                    </form>
-                </li>
-            @endforeach
-        </ul>
-
-        <form action="{{ route('cart.clear') }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-warning w-100">Clear Cart</button>
-        </form>
-
-        @auth
-            <a href="{{ route('order.checkout') }}" class="btn btn-success w-100 mt-3">
-                Proceed to Checkout
-            </a>
-        @else
-            <div class="alert alert-info text-center mt-3">
-                <p>Please <a href="{{ route('login') }}">log in</a> to proceed with checkout.</p>
-                <p>Don't have an account? <a href="{{ route('register') }}">Register here</a>.</p>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <form action="{{ route('cart.clear') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-warning w-100">{{ __('cart/list.clear_cart') }}</button>
+                </form>
             </div>
-        @endauth
+            <div class="col-md-6">
+                @auth
+                    <a href="{{ route('order.checkout') }}" class="btn btn-success w-100">
+                        {{ __('cart/list.checkout') }}
+                    </a>
+                @else
+                    <p>{{ __('cart/list.login_required') }} <a href="{{ route('login') }}">{{ __('cart/list.login') }}</a></p>
+                    <p>{{ __('cart/list.no_account') }} <a href="{{ route('register') }}">{{ __('cart/list.register_here') }}</a>.</p>
+                @endauth
+            </div>
+        </div>
     @else
-        <p class="text-muted text-center">Your cart is empty</p>
+        <p class="text-muted text-center">{{ __('cart/list.empty_cart') }}</p>
     @endif
 </div>
 @endsection 

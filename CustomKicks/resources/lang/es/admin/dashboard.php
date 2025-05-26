@@ -1,4 +1,5 @@
 <?php
+
 // Nicolas
 return [
     'title' => 'Panel de Administración - Customizaciones',

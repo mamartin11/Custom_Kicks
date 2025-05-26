@@ -1,8 +1,11 @@
 <?php
-//Miguel Angel Martinez
+
+// Miguel Angel Martinez
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -10,16 +13,21 @@ class Product extends Model
      * ATTRIBUTES
      * $this->attributes['id'] - int - contains the product primary key (id)
      * $this->attributes['name'] - string - contains the product name
-     * $this->attributes['price'] - string - contains the product price
-     * $this->attributes['description'] - int - contains the product description
+     * $this->attributes['price'] - float - contains the product price
+     * $this->attributes['description'] - string - contains the product description
      * $this->attributes['brand'] - string - contains the product brand
      * $this->attributes['size'] - float - contains the product size
      * $this->attributes['quantity'] - int - contains the product quantity
      * $this->attributes['image'] - string - contains the product image path
      * $this->attributes['created_at'] - timestamp - contains the product creation date
      * $this->attributes['updated_at'] - timestamp - contains the product last update date
+     *
+     * RELATIONS
+     * $this->items - HasMany - contains the items that use this product
      */
-    public static function validate($request)
+    protected $fillable = ['name', 'price', 'description', 'brand', 'size', 'quantity', 'image'];
+
+    public static function validate($request): void
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -42,7 +50,7 @@ class Product extends Model
         return $this->attributes['name'];
     }
 
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
     }
@@ -52,7 +60,7 @@ class Product extends Model
         return $this->attributes['price'];
     }
 
-    public function setPrice($price): void
+    public function setPrice(float $price): void
     {
         $this->attributes['price'] = $price;
     }
@@ -62,7 +70,7 @@ class Product extends Model
         return $this->attributes['description'];
     }
 
-    public function setDescription($description): void
+    public function setDescription(string $description): void
     {
         $this->attributes['description'] = $description;
     }
@@ -72,7 +80,7 @@ class Product extends Model
         return $this->attributes['brand'];
     }
 
-    public function setBrand($brand): void
+    public function setBrand(string $brand): void
     {
         $this->attributes['brand'] = $brand;
     }
@@ -82,7 +90,7 @@ class Product extends Model
         return $this->attributes['size'];
     }
 
-    public function setSize($size): void
+    public function setSize(float $size): void
     {
         $this->attributes['size'] = $size;
     }
@@ -92,28 +100,44 @@ class Product extends Model
         return $this->attributes['quantity'];
     }
 
-    public function setQuantity($quantity): void
+    public function setQuantity(int $quantity): void
     {
         $this->attributes['quantity'] = $quantity;
     }
 
-    public function setImage($imagePath)
+    public function setImage(string $imagePath): void
     {
         $this->attributes['image'] = $imagePath;
     }
 
-    public function getImage()
+    public function getImage(): string
     {
         return $this->attributes['image'];
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->attributes['updated_at'];
+    }
+
+    /**
+     * Get items that use this product
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    /**
+     * Get items for this product
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

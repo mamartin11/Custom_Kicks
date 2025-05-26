@@ -1,12 +1,15 @@
 <?php
+
 // Miguel Angel Martinez
+
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $viewData = [];
         $viewData['title'] = 'Custom Sneakers - Home';

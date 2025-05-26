@@ -1,4 +1,5 @@
 <?php
+
 // Miguel
 return [
     'title' => 'Panel de Administración - Productos',

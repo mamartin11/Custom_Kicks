@@ -1,5 +1,6 @@
 <?php
-//Nicolas
+
+// Nicolas
 return [
     'title' => 'Seleccionar Personalización',
     'subtitle' => 'Elige una personalización para tu zapato',

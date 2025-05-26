@@ -1,10 +1,10 @@
 <?php
+
 // Miguel Angel Martinez
 // Nicolas Hurtado A
 // Santiago Rodriguez
 // Jacobo Restrepo
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration

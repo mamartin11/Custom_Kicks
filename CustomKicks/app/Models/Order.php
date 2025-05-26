@@ -1,7 +1,7 @@
 <?php
-//Jacobo Restrepo
-//Nicolas Hurtado
 
+// Jacobo Restrepo
+// Nicolas Hurtado
 
 namespace App\Models;
 
@@ -18,17 +18,23 @@ class Order extends Model
      * $this->attributes['user_id'] - int - contains the user id
      * $this->attributes['details'] - array - contains the order details
      * $this->attributes['order_date'] - date - contains the order date
+     * $this->attributes['discount'] - int - contains the discount percentage applied
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
+     *
+     * RELATIONS
+     * $this->user - BelongsTo - contains the user who placed this order
+     * $this->items - HasMany - contains the items in this order
      */
-    protected $fillable = ['total', 'order_date', 'user_id', 'details'];
+    protected $fillable = ['total', 'order_date', 'user_id', 'details', 'discount'];
 
-    public static function validate($request)
+    public static function validate($request): void
     {
         $request->validate([
             'total' => 'required|integer',
             'order_date' => 'required|date',
             'user_id' => 'required|integer',
+            'discount' => 'nullable|integer|min:0|max:100',
         ]);
     }
 
@@ -45,6 +51,26 @@ class Order extends Model
     public function setTotal(int $total): void
     {
         $this->attributes['total'] = $total;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->attributes['user_id'];
+    }
+
+    public function setUserId(int $userId): void
+    {
+        $this->attributes['user_id'] = $userId;
+    }
+
+    public function getDiscount(): int
+    {
+        return $this->attributes['discount'] ?? 0;
+    }
+
+    public function setDiscount(int $discount): void
+    {
+        $this->attributes['discount'] = $discount;
     }
 
     public function getOrderDate(): string
@@ -70,23 +96,45 @@ class Order extends Model
         return json_decode($this->attributes['details'], true) ?? [];
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->attributes['updated_at'];
     }
 
+    /**
+     * Get the items in this order
+     */
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
     }
 
+    /**
+     * Get items for this order
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Get the user who placed this order
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get user for this order
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

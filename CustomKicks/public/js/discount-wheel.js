@@ -14,8 +14,20 @@ document.addEventListener('DOMContentLoaded', function () {
  
     let angles = [0, 90, 180, 270];
     let discounts = [10, 20, 50, 0]; // 0 significa "No ganaste"
+    let hasSpun = false; // Variable de control para evitar múltiples giros
  
     spinButton.addEventListener('click', function () {
+        // Verificar si ya se ha girado la ruleta
+        if (hasSpun) {
+            return; // No hacer nada si ya se giró
+        }
+        
+        // Deshabilitar el botón inmediatamente al hacer clic
+        spinButton.disabled = true;
+        spinButton.textContent = 'Girando...';
+        spinButton.classList.add('disabled');
+        hasSpun = true;
+        
         let randomIndex = Math.floor(Math.random() * angles.length);
         let selectedAngle = angles[randomIndex];
         let selectedDiscount = discounts[randomIndex];
@@ -24,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
  
         setTimeout(() => {
             if (selectedDiscount === 0) {
-                resultText.textContent = "No discount this time 😢";
+                resultText.textContent = "Sin descuento esta vez 😢";
             } else {
-                resultText.textContent = `You won ${selectedDiscount}% off! 🎉`;
+                resultText.textContent = `¡Ganaste ${selectedDiscount}% de descuento! 🎉`;
             }
  
             discountValue.textContent = selectedDiscount;
@@ -47,6 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // Ocultar el botón "Spin the Wheel" y mostrar "Confirm Order"
             document.getElementById('spinWheelBtn').classList.add('d-none');
             confirmBtn.classList.remove('d-none');
+            
+            // Cambiar el texto del botón para indicar que ya se usó
+            spinButton.textContent = '¡Ya giraste la ruleta!';
         }, 3000);
     });
 });
