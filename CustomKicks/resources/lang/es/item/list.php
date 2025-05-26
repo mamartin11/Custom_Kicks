@@ -8,9 +8,9 @@ return [
     'design' => 'Diseño',
     'pattern' => 'Patrón',
     'subtotal' => 'Subtotal',
-    'remove' => 'Quitar del carrito',
-    'clear' => 'Limpiar carrito',
+    'remove' => 'Eliminar del carrito',
+    'clear' => 'Vaciar carrito',
     'checkout' => 'Proceder al pago',
-    'items' => 'Salvar items',
+    'items' => 'Guardar artículos',
     'empty' => 'Tu carrito está vacío.',
-];
+]; 

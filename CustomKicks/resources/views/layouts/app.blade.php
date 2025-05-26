@@ -47,7 +47,26 @@
                     <a class="nav-link" href="{{ route('cart.list') }}">{{ __('layout/app.nav_cart') }}</a>
                 </li>
 
-
+                <li class="nav-item dropdown d-flex">
+                    <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ __('layout/app.language') }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                        <form action="{{ url('/toggle-language') }}" method="GET">
+                            <input type="hidden" name="lang" value="en">
+                            <button class="dropdown-item" type="submit">{{ __('layout/app.en') }}</button>
+                        </form>
+                        </li>
+                        <li>
+                        <form action="{{ url('/toggle-language') }}" method="GET">
+                            <input type="hidden" name="lang" value="es">
+                            <button class="dropdown-item" type="submit">{{ __('layout/app.es') }}</button>
+                        </form>
+                        </li>
+                    </ul>
+                </li>
 
 
                 @if(isset($usdToCop))

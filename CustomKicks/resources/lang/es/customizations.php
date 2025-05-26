@@ -4,10 +4,10 @@
 return [
     'title' => 'Seleccionar Personalización',
     'subtitle' => 'Elige una personalización para tu zapato',
-    'success' => '¡Personalización aplicada con éxito!',
+    'success' => '¡Personalización aplicada exitosamente!',
     'color' => 'Color',
     'design' => 'Diseño',
     'pattern' => 'Patrón',
-    'select_customization' => 'Seleccionar una Personalización:',
-    'use_customization' => 'Usar esta personalización y añadir al carrito',
-];
+    'select_customization' => 'Selecciona una Personalización:',
+    'use_customization' => 'Usar esta personalización y agregar al carrito',
+]; 

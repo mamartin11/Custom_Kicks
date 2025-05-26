@@ -13,4 +13,7 @@ return [
     'nav_logout' => 'Logout',
     'nav_my_orders' => 'My Orders',
     'footer' => 'Special Topics in Software Engineering',
+    'language' => 'EN',
+    'en' => 'English',
+    'es' => 'Spanish',
 ];

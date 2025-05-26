@@ -3,10 +3,10 @@
 // Jacobo
 return [
     'title' => 'Orden - Custom Kicks',
-    'subtitle' => 'Resumen de tu orden',
+    'subtitle' => 'Resumen de la Orden',
     'color' => 'Color',
     'design' => 'Diseño',
-    'pattern' => 'patrón',
+    'pattern' => 'Patrón',
     'subtotal' => 'Subtotal',
     'actual_budget' => 'Tu dinero',
     'total' => 'Total de la orden',
@@ -15,7 +15,8 @@ return [
     'total_after_discount' => 'Total después del descuento',
     'remaining_budget' => 'Dinero restante',
     'no_items' => 'No hay productos en tu carrito',
-    'wheel' => 'Gira la ruleta!',
+    'wheel' => '¡Gira la ruleta!',
     'button' => 'Confirmar orden',
-    'confirmation' => 'Tu orden ha sido confirmada!',
-];
+    'confirmation' => '¡Tu orden ha sido confirmada!',
+    'insufficient_budget' => 'Presupuesto insuficiente para completar la compra',
+]; 

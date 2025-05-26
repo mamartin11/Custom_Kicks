@@ -1,24 +1,20 @@
 <?php
 
+// Miguel
 return [
-    'management' => 'Gestión de Productos',
-    'add_new' => 'Agregar Nuevo',
+    'title' => 'Panel de Administración - Productos',
+    'subtitle' => 'Gestionar productos del sistema.',
+    'crud_customizations' => 'CRUD Personalizaciones',
+    'crud_products' => 'CRUD Productos',
+    'add_product' => 'Agregar nuevo producto',
     'id' => 'ID',
-    'image' => 'Imagen',
     'name' => 'Nombre',
-    'brand' => 'Marca',
+    'image' => 'Imagen',
     'price' => 'Precio',
     'size' => 'Talla',
+    'brand' => 'Marca',
     'quantity' => 'Cantidad',
     'actions' => 'Acciones',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
-    'delete_confirm' => '¿Estás seguro de que quieres eliminar este producto?',
-    'add_header' => 'Agregar Nuevo Producto',
-    'edit_header' => 'Editar Producto',
-    'description' => 'Descripción',
-    'save' => 'Guardar',
-    'current_image' => 'Imagen actual',
-    'leave_empty' => 'Dejar vacío para mantener la imagen actual',
-    'no_image' => 'Sin imagen',
-];
+]; 

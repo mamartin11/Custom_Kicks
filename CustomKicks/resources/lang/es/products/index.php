@@ -9,5 +9,5 @@ return [
     'filter' => 'Filtrar',
     'price' => 'Precio',
     'view' => 'Ver',
-    'no_products' => 'No se encontraron productos que coincidan con tus criterios.',
+    'no_products' => 'No se encontraron productos.',
 ];
