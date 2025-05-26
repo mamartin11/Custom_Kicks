@@ -17,4 +17,6 @@ return [
     'pattern' => 'Patrón',
     'subtotal' => 'Subtotal',
     'discount' => 'Descuento obtenido',
+    'type' => 'Tipo de Envío',
+    'status' => 'Estado'
 ]; 

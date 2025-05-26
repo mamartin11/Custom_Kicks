@@ -1,0 +1,99 @@
+.tracking-status {
+    margin-top: 2rem;
+}
+
+.tracking-progress {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.tracking-progress::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e9ecef;
+    z-index: 1;
+}
+
+.tracking-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    position: relative;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.tracking-step.completed {
+    opacity: 1;
+}
+
+.tracking-step:last-child {
+    margin-bottom: 0;
+}
+
+.tracking-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.tracking-step.completed .tracking-icon {
+    background-color: #28a745;
+    color: white;
+}
+
+.tracking-step.active .tracking-icon {
+    background: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.tracking-info {
+    flex-grow: 1;
+}
+
+.tracking-info h6 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.tracking-info small {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.order-info {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.order-info h6 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.order-info p {
+    margin-bottom: 0.5rem;
+}
+
+.order-info p:last-child {
+    margin-bottom: 0;
+}
+
+.order-info strong {
+    color: #495057;
+} 

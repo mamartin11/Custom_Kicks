@@ -8,6 +8,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\OrderTrackingController;
 
 // Auth routes
 Auth::routes();
@@ -34,6 +36,10 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/my-orders', 'myOrders')->name('order.my-orders');
 });
 
+// Rutas de seguimiento de pedidos
+Route::get('/order-tracking', [ShippingController::class, 'showTracking'])->name('order.tracking');
+Route::get('/api/orders/{orderId}/tracking', [ShippingController::class, 'getTrackingInfo']);
+
 // Admin Routes
 Route::prefix('admin')
     ->name('admin.')
@@ -59,3 +65,6 @@ Route::prefix('admin')
             Route::post('/customizations/store', 'store')->name('customizations.store');
         });
     });
+
+Route::post('/api/shipping/calculate-cost', [ShippingController::class, 'calculateCost'])->name('shipping.calculate-cost');
+Route::post('/api/shipping/confirm-type', [ShippingController::class, 'confirmShippingType'])->name('shipping.confirm-type');

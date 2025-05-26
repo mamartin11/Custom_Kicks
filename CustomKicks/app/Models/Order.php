@@ -20,26 +20,35 @@ class Order extends Model
      * $this->attributes['order_date'] - date - contains the order date
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
+     * $this->attributes['shipping_type'] - string - contains the shipping type (standard/express)
      */
-    protected $fillable = ['total', 'order_date', 'user_id', 'details'];
+    protected $fillable = [
+        'user_id',
+        'total',
+        'status',
+        'shipping_type',
+        'shipping_cost',
+        'tracking_number'
+    ];
 
-    public static function validate($request)
+    public static function validate($request): void
     {
         $request->validate([
             'total' => 'required|integer',
             'order_date' => 'required|date',
             'user_id' => 'required|integer',
+            'shipping_type' => 'required|string|in:standard,express'
         ]);
     }
 
-    public function getId(): int
+    public function getId(): string
     {
-        return $this->attributes['id'];
+        return $this->id;
     }
 
-    public function getTotal(): int
+    public function getTotal(): float
     {
-        return $this->attributes['total'];
+        return $this->total ?? 0.00;
     }
 
     public function setTotal(int $total): void
@@ -49,10 +58,7 @@ class Order extends Model
 
     public function getOrderDate(): string
     {
-        return $this->attributes['order_date']
-            ? date('Y-m-d', strtotime($this->attributes['order_date']))
-            : null;
-
+        return $this->created_at->format('Y-m-d H:i:s');
     }
 
     public function setOrderDate(string $orderDate): void
@@ -70,12 +76,12 @@ class Order extends Model
         return json_decode($this->attributes['details'], true) ?? [];
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }
@@ -88,5 +94,23 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getShippingType(): string
+    {
+        return $this->shipping_type ?? 'standard';
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status ?? 'pending';
+    }
+
+    public function setShippingType(string $shippingType): void
+    {
+        if (!in_array($shippingType, ['standard', 'express'])) {
+            throw new \InvalidArgumentException('El tipo de envío debe ser "standard" o "express"');
+        }
+        $this->attributes['shipping_type'] = $shippingType;
     }
 }
