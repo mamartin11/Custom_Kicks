@@ -15,5 +15,5 @@ return [
     'subtotal' => 'Subtotal',
     'discount' => 'Discount obtained',
     'type' => 'Shipping Type',
-    'status' => 'Status'
-]; 
+    'status' => 'Status',
+];

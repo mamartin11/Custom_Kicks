@@ -6,8 +6,8 @@ use App\Models\Customization;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Session;
+use Tests\TestCase;
 
 class CartControllerTest extends TestCase
 {

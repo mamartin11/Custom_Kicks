@@ -20,4 +20,4 @@ return [
     'management' => 'Gestión de Productos',
     'add_new' => 'Agregar nuevo producto',
 
-]; 
+];

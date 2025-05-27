@@ -22,4 +22,4 @@ return [
     'empty_cart' => 'Tu carrito está vacío.',
     'empty_cart_error' => 'Tu carrito está vacío. Agrega productos antes de proceder al pago.',
     'insufficient_budget' => 'Presupuesto insuficiente. Total: $:total, Tu presupuesto: $:budget',
-]; 
+];

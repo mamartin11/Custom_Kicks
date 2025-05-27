@@ -16,4 +16,4 @@ return [
     'language' => 'ES',
     'es' => 'Español',
     'en' => 'Inglés',
-]; 
+];

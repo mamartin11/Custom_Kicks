@@ -8,4 +8,4 @@ return [
     'placeholder_size' => 'Talla',
     'placeholder_brand' => 'Marca',
     'filter_button' => 'Filtrar',
-]; 
+];

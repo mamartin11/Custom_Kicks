@@ -13,4 +13,4 @@ return [
     'checkout' => 'Proceder al pago',
     'items' => 'Guardar artículos',
     'empty' => 'Tu carrito está vacío.',
-]; 
+];

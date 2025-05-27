@@ -22,4 +22,4 @@ return [
     'empty_cart' => 'Your cart is empty.',
     'empty_cart_error' => 'Your cart is empty. Add products before proceeding to payment.',
     'insufficient_budget' => 'Insufficient budget. Total: $:total, Your budget: $:budget',
-]; 
+];

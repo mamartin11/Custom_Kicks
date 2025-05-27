@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customization;
 use App\Models\Product;
+use App\Services\ExternalProductService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -60,5 +62,26 @@ class ProductController extends Controller
         $viewData['customizations'] = Customization::all();
 
         return view('products.show')->with('viewData', $viewData);
+    }
+
+    public function externalProducts(ExternalProductService $externalProductService): View|RedirectResponse
+    {
+        $products = $externalProductService->getProducts();
+
+        if (is_null($products)) {
+            // Handle the case where products could not be fetched
+            // You might want to return a view with an error message
+            // or redirect back with an error.
+            return back()->with('error', 'Unable to fetch products from the external source at this time.');
+        }
+
+        // Pass the base URL for images to the view as well, or handle it in the service
+        $imageBaseUrl = rtrim(env('EXTERNAL_PRODUCT_API_URL'), '/');
+
+        return view('products.external_index', [
+            'products' => $products,
+            'externalProductService' => $externalProductService, // To use getFullImageUrl in the view
+            'pageTitle' => 'External Products', // Optional: for consistency if you use $pageTitle
+        ]);
     }
 }

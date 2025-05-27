@@ -10,4 +10,4 @@ return [
     'pattern' => 'Patrón',
     'select_customization' => 'Selecciona una Personalización:',
     'use_customization' => 'Usar esta personalización y agregar al carrito',
-]; 
+];

@@ -17,4 +17,4 @@ return [
     'actions' => 'Acciones',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
-]; 
+];

@@ -32,4 +32,4 @@ return [
             'distance_factor' => 1.5,
         ],
     ],
-]; 
+];

@@ -22,4 +22,4 @@ return [
     'newest_title' => '🔥 Lo más nuevo en Custom Kicks 🔥',
     'newest_description' => 'Descubre nuestros últimos sneakers base esperándote',
     'newest_button' => 'Personalízalo ahora',
-]; 
+];

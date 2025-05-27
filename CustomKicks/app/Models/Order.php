@@ -5,10 +5,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -24,7 +24,7 @@ class Order extends Model
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      * $this->attributes['shipping_type'] - string - contains the shipping type (standard/express)
      */
-    use HasFactory; 
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
@@ -32,7 +32,7 @@ class Order extends Model
         'status',
         'shipping_type',
         'shipping_cost',
-        'tracking_number'
+        'tracking_number',
     ];
 
     public static function validate($request): void
@@ -41,7 +41,7 @@ class Order extends Model
             'total' => 'required|integer',
             'order_date' => 'required|date',
             'user_id' => 'required|integer',
-            'shipping_type' => 'required|string|in:standard,express'
+            'shipping_type' => 'required|string|in:standard,express',
         ]);
     }
 
@@ -146,7 +146,7 @@ class Order extends Model
 
     public function setShippingType(string $shippingType): void
     {
-        if (!in_array($shippingType, ['standard', 'express'])) {
+        if (! in_array($shippingType, ['standard', 'express'])) {
             throw new \InvalidArgumentException('El tipo de envío debe ser "standard" o "express"');
         }
         $this->attributes['shipping_type'] = $shippingType;

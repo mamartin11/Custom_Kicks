@@ -22,4 +22,4 @@ return new class extends Migration
             $table->dropColumn(['shipping_type', 'shipping_cost', 'tracking_number', 'status']);
         });
     }
-}; 
+};

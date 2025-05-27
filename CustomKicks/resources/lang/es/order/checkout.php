@@ -19,4 +19,4 @@ return [
     'button' => 'Confirmar orden',
     'confirmation' => '¡Tu orden ha sido confirmada!',
     'insufficient_budget' => 'Presupuesto insuficiente para completar la compra',
-]; 
+];

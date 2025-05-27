@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\ShippingServiceInterface;
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ShippingController extends Controller
 {
@@ -25,7 +25,7 @@ class ShippingController extends Controller
             'order_id' => 'required|string',
             'order_total' => 'required|numeric|min:0',
             'distance' => 'required|numeric|min:0',
-            'shipping_type' => 'required|in:standard,express'
+            'shipping_type' => 'required|in:standard,express',
         ]);
 
         $cost = $this->shippingService->calculateShippingCost($validated);
@@ -33,9 +33,9 @@ class ShippingController extends Controller
         return response()->json([
             'shipping_cost' => $cost,
             'shipping_type' => $validated['shipping_type'],
-            'estimated_delivery' => $validated['shipping_type'] === 'express' ? 
-                now()->addDays(2)->format('Y-m-d') : 
-                now()->addDays(5)->format('Y-m-d')
+            'estimated_delivery' => $validated['shipping_type'] === 'express' ?
+                now()->addDays(2)->format('Y-m-d') :
+                now()->addDays(5)->format('Y-m-d'),
         ]);
     }
 
@@ -43,11 +43,11 @@ class ShippingController extends Controller
     {
         $validated = $request->validate([
             'order_id' => 'required|string',
-            'shipping_type' => 'required|in:standard,express'
+            'shipping_type' => 'required|in:standard,express',
         ]);
 
         $order = Order::find($validated['order_id']);
-        if (!$order) {
+        if (! $order) {
             return response()->json(['error' => 'Order not found'], 404);
         }
 
@@ -56,7 +56,7 @@ class ShippingController extends Controller
 
         return response()->json([
             'message' => 'Shipping type confirmed successfully',
-            'shipping_type' => $validated['shipping_type']
+            'shipping_type' => $validated['shipping_type'],
         ]);
     }
 
@@ -87,7 +87,7 @@ class ShippingController extends Controller
 
         return response()->json([
             'message' => 'Shipping processed successfully',
-            'data' => $shippingDetails
+            'data' => $shippingDetails,
         ]);
     }
 
@@ -105,8 +105,8 @@ class ShippingController extends Controller
     public function getTrackingInfo(string $orderId): JsonResponse
     {
         $order = Order::find($orderId);
-        
-        if (!$order) {
+
+        if (! $order) {
             return response()->json(['error' => 'Order not found'], 404);
         }
 
@@ -120,8 +120,8 @@ class ShippingController extends Controller
                 'confirmed' => now()->format('Y-m-d H:i:s'),
                 'preparation' => now()->addHours(2)->format('Y-m-d H:i:s'),
                 'transit' => null,
-                'delivery' => null
-            ]
+                'delivery' => null,
+            ],
         ]);
     }
-} 
+}

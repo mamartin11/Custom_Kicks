@@ -15,4 +15,4 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'delete_confirm' => 'Are you sure you want to delete this customization?',
-]; 
+];
