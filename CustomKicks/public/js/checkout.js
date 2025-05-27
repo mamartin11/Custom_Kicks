@@ -65,6 +65,27 @@ document.addEventListener('DOMContentLoaded', function () {
                         <strong>Tu nuevo budget: $${data.new_budget ? data.new_budget.toFixed(2) : '0.00'}</strong>
                     </small>
                 `;
+
+                // Actualizar el contador de 'Remaining money'
+                const counterElement = document.getElementById('counter');
+                if (counterElement && data.new_budget !== undefined) {
+                    // Obtener el valor actual del contador, que es el budget ANTES del descuento y de este pedido
+                    const budgetBeforeThisOrderAndDiscount = parseFloat(counterElement.dataset.budget);
+                    // El valor 'from' para la animación debe ser el budget que se estaba mostrando como 'remaining', 
+                    // que era el budget del usuario MENOS el total SIN descuento.
+                    // El 'total' original sin descuento está en data.original_total
+                    const remainingBeforeDiscount = budgetBeforeThisOrderAndDiscount - data.original_total;
+
+                    animateCount({
+                        from: remainingBeforeDiscount, // Start from remaining budget before discount
+                        to: data.new_budget,      // Animate to the final new budget
+                        duration: 1,              // Shorter animation as it's a secondary update
+                        onEnd: () => {
+                            // Adicionalmente, asegurarse que el texto final es el correcto
+                            counterElement.textContent = (data.new_budget).toFixed(2);
+                        }
+                    });
+                }
             } else {
                 console.error('Error al actualizar:', data.message);
             }
