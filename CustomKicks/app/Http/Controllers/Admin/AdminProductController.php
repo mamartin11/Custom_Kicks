@@ -18,10 +18,6 @@ class AdminProductController extends Controller
      */
     public function index(): View
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
-
         $viewData = [];
         $viewData['products'] = Product::all();
 
@@ -33,9 +29,6 @@ class AdminProductController extends Controller
      */
     public function create(): View
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
 
         $viewData = [];
         $viewData['title'] = 'Create a product';
@@ -48,9 +41,6 @@ class AdminProductController extends Controller
      */
     public function save(Request $request): RedirectResponse
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
 
         Product::validate($request);
 
@@ -77,9 +67,6 @@ class AdminProductController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
 
         Product::destroy($id);
 
@@ -91,9 +78,6 @@ class AdminProductController extends Controller
      */
     public function edit(string $id): View
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
 
         $viewData = [];
         $product = Product::findOrFail($id);
@@ -109,9 +93,6 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
 
         Product::validate($request);
 

@@ -18,10 +18,6 @@ class AdminCustomizationController extends Controller
      */
     public function index(): View
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
-
         $viewData = [];
         $viewData['customizations'] = Customization::all();
 
@@ -33,10 +29,6 @@ class AdminCustomizationController extends Controller
      */
     public function edit(string $id): View
     {
-        if (Auth::user()->getRole() !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
-
         $customization = Customization::findOrFail($id);
 
         $viewData = [];
@@ -50,10 +42,6 @@ class AdminCustomizationController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
-
         $customization = Customization::findOrFail($id);
 
         $customization->setColor($request->input('color'));
@@ -70,10 +58,6 @@ class AdminCustomizationController extends Controller
      */
     public function delete(string $id): RedirectResponse
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
-
         Customization::destroy($id);
 
         return redirect()->route('admin.customizations.dashboard')->with('success', 'Customization deleted successfully.');
@@ -84,10 +68,6 @@ class AdminCustomizationController extends Controller
      */
     public function add(): View
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
-
         return view('admin.customizations.add');
     }
 
@@ -96,10 +76,6 @@ class AdminCustomizationController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'You do not have permission to access this page.');
-        }
-
         Customization::validations($request);
 
         $customization = new Customization;
