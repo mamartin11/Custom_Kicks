@@ -52,8 +52,9 @@ class AdminProductController extends Controller
         $newProduct->setQuantity($request->input('quantity'));
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-            $newProduct->setImage($imagePath);
+            // Read the binary content of the image
+            $imageData = file_get_contents($request->file('image')->getRealPath());
+            $newProduct->setImage($imageData);
         }
 
         $newProduct->save();
@@ -104,8 +105,9 @@ class AdminProductController extends Controller
         $product->setQuantity($request->input('quantity'));
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-            $product->setImage($imagePath);
+            // Read the binary content of the image
+            $imageData = file_get_contents($request->file('image')->getRealPath());
+            $product->setImage($imageData);
         }
 
         $product->save();

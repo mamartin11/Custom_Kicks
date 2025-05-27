@@ -11,7 +11,11 @@
 <div class="card mb-4">
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="{{ asset('storage/' . $viewData['product']->getImage()) }}" class="img-fluid rounded-start" alt="Product Image">
+            @if ($viewData['product']->getImage())
+                <img src="{{ $viewData['product']->getImage() }}" class="img-fluid rounded-start" alt="Product Image">
+            @else
+                <img src="{{ asset('images/placeholder.png') }}" class="img-fluid rounded-start" alt="No image available">
+            @endif
         </div>
         <div class="col-md-8">
             <div class="card-body">

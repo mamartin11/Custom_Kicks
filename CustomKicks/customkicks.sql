@@ -65,7 +65,7 @@ CREATE TABLE `customizations` (
   `color` varchar(255) NOT NULL,
   `design` varchar(255) NOT NULL,
   `pattern` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` longblob DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

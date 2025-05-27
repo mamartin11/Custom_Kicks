@@ -23,6 +23,7 @@ Route::middleware(['App\Http\Middleware\Locale'])->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/products', 'index')->name('product.index');
         Route::get('/products/{id}', 'show')->name('product.show');
+        Route::get('/products/{id}/image', 'serveImage')->name('product.image');
         Route::get('/external-products', 'externalProducts')->name('products.external');
     });
 

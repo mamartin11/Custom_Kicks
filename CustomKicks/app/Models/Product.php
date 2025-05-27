@@ -21,7 +21,7 @@ class Product extends Model
      * $this->attributes['brand'] - string - contains the product brand
      * $this->attributes['size'] - float - contains the product size
      * $this->attributes['quantity'] - int - contains the product quantity
-     * $this->attributes['image'] - string - contains the product image path
+     * $this->attributes['image'] - longblob - contains the product image binary data
      * $this->attributes['created_at'] - timestamp - contains the product creation date
      * $this->attributes['updated_at'] - timestamp - contains the product last update date
      *
@@ -108,14 +108,40 @@ class Product extends Model
         $this->attributes['quantity'] = $quantity;
     }
 
-    public function setImage(string $imagePath): void
+    /**
+     * Set the image for the product.
+     *
+     * @param string $imageData The binary image data.
+     */
+    public function setImage(string $imageData): void
     {
-        $this->attributes['image'] = $imagePath;
+        $this->attributes['image'] = $imageData;
     }
 
-    public function getImage(): string
+    /**
+     * Get the URL to the product image if image data exists, otherwise null.
+     * If raw image data is needed, access $this->attributes['image'] directly 
+     * or create a new method like getRawImageData().
+     *
+     * @return string|null
+     */
+    public function getImage(): ?string
     {
-        return $this->attributes['image'];
+        // Check if the image attribute is set and not empty
+        if (!empty($this->attributes['image'])) {
+            return route('product.image', ['id' => $this->getId()]);
+        }
+        return null; // Or a path to a default placeholder image if you prefer
+    }
+
+    /**
+     * Get the raw image data for the product.
+     *
+     * @return string|null
+     */
+    public function getRawImageData(): ?string
+    {
+        return $this->attributes['image'] ?? null;
     }
 
     public function getCreatedAt(): ?string

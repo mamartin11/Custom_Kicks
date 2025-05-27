@@ -10,6 +10,7 @@ use App\Services\ExternalProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
 {
@@ -83,5 +84,39 @@ class ProductController extends Controller
             'externalProductService' => $externalProductService, // To use getFullImageUrl in the view
             'pageTitle' => 'External Products', // Optional: for consistency if you use $pageTitle
         ]);
+    }
+
+    public function serveImage(string $id)
+    {
+        $product = Product::findOrFail($id);
+
+        // Use getRawImageData() to fetch the binary data
+        $imageData = $product->getRawImageData();
+
+        if ($product && $imageData) {
+            // Attempt to determine content type. Default to jpeg if unknown.
+            // For more robust type detection, consider using finfo_buffer or similar.
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
+            $contentType = $finfo->buffer($imageData);
+
+            // If finfo couldn't determine, or gives a generic binary stream, default or make a guess
+            if (!$contentType || $contentType == 'application/octet-stream') {
+                // Basic check for common image types based on magic numbers (very basic)
+                if (substr($imageData, 0, 4) === "\xFF\xD8\xFF\xE0" || substr($imageData, 0, 4) === "\xFF\xD8\xFF\xE1") {
+                    $contentType = 'image/jpeg';
+                } elseif (substr($imageData, 0, 8) === "\x89PNG\r\n\x1a\n") {
+                    $contentType = 'image/png';
+                } elseif (substr($imageData, 0, 6) === "GIF87a" || substr($imageData, 0, 6) === "GIF89a") {
+                    $contentType = 'image/gif';
+                } else {
+                    $contentType = 'image/jpeg'; // Default fallback
+                }
+            }
+
+            return Response::make($imageData, 200, ['Content-Type' => $contentType]);
+        }
+
+        // Return a 404 or a default image if no image data is found
+        abort(404, 'Image not found.');
     }
 }

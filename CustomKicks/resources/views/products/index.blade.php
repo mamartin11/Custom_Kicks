@@ -45,7 +45,11 @@
         @forelse($viewData['products'] as $product)
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="{{ asset('storage/' . $product->getImage()) }}" class="card-img-top" alt="{{ $product->getName() }}">
+                    @if ($product->getImage())
+                        <img src="{{ $product->getImage() }}" class="card-img-top" alt="{{ $product->getName() }}">
+                    @else
+                        <img src="{{ asset('images/placeholder.png') }}" class="card-img-top" alt="No image available">
+                    @endif
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->getName() }}</h5>
                         <p class="card-text">
