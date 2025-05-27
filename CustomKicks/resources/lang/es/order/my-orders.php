@@ -16,4 +16,5 @@ return [
     'discount' => 'Descuento obtenido',
     'type' => 'Tipo de Envío',
     'status' => 'Estado',
+    'close' => 'Cerrar',
 ];
